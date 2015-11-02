@@ -20,8 +20,8 @@ public class Master {
         writeApiHost = "https://www.utv.vegvesen.no";
         loginserverUrl = "https://www.utv.vegvesen.no/openam/UI/Login";
 
-        //defining path for certificates Mega hardcoded Path
-        System.setProperty("javax.net.ssl.trustStore", "C:\\Users\\magopl\\MyWorkspace\\nvdb-gml-generator\\cacerts-custom.jks");
+        //defining path for certificates
+        System.setProperty("javax.net.ssl.trustStore", "cacerts-custom.jks");
         try{
             apiGateway = new NvdbWriteApiGateway(loginserverUrl,user,pw,writeApiHost);
             try{
