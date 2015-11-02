@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xlmns="http://www.w3.org/2001/XMLSchema" xlmns:gml="http://www.opengis.net/gml/3.2">
+	<element name="retning">
+		<simpleType>
+			<restriction base="INTEGER">
+				<minInclusive value="-2147483648">
+				</minInclusive>
+				<maxInclusive value="2147483647">
+				</maxInclusive>
+				<maxLength value="2">
+				</maxLength>
+			</restriction>
+			<documentation>
+				Angir hvilken retning i forhold til metrering vegobjektet har.  Angir klokkeretning som vannet renner i, 12 angir at vannet renner parallelt med vegen i metreringsretningen
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="utgårHøydePassasje">
+		<simpleType>
+			<restriction base="INTEGER">
+				<documentation>
+					Enhet: Millimeter (4)
+				</documentation>
+				<minInclusive value="0">
+				</minInclusive>
+				<maxInclusive value="9999">
+				</maxInclusive>
+				<maxLength value="4">
+				</maxLength>
+			</restriction>
+			<documentation>
+				Angir innvendig høyde når det er tatt hensyn til eventuelle hindringer, f.eks masser i bunn, oppheng i tak.  Normalt ikke aktuelt å oppgi for vanngjennomløp.
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="harInnløpsrist">
+		<simpleType>
+			<restriction base="STRING">
+				<enumeration value="Nei">
+				</enumeration>
+				<enumeration value="Ja">
+				</enumeration>
+			</restriction>
+			<documentation>
+				Angir om det er innløpsrist i tilknytning til vegobjektet
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="breddeInnvendig">
+		<simpleType>
+			<restriction base="INTEGER">
+				<documentation>
+					Enhet: Millimeter (4)
+				</documentation>
+				<minInclusive value="0">
+				</minInclusive>
+				<maxInclusive value="9999">
+				</maxInclusive>
+				<maxLength value="4">
+				</maxLength>
+			</restriction>
+			<documentation>
+				Angir innvendig bredde av gjennomløpskonstruksjon.  Ikke aktuell for sirkulære tverrsnitt
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="navn">
+		<simpleType>
+			<restriction base="STRING">
+			</restriction>
+			<documentation>
+				Angir navn knyttet til stikkrenne/kulvert
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="høydeInnvendig">
+		<simpleType>
+			<restriction base="INTEGER">
+				<documentation>
+					Enhet: Millimeter (4)
+				</documentation>
+				<minInclusive value="0">
+				</minInclusive>
+				<maxInclusive value="9999">
+				</maxInclusive>
+				<maxLength value="4">
+				</maxLength>
+			</restriction>
+			<documentation>
+				Angir innvendig høyde av gjennomløpskonstruksjon.  Tar ikke hensyn til evt. gjennfylling i bunn av konstruksjon..
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="bruksområde">
+		<simpleType>
+			<restriction base="STRING">
+				<enumeration value="Voll, vanngjennomløp">
+				</enumeration>
+				<enumeration value="Vann">
+				</enumeration>
+				<enumeration value="Landbruk">
+				</enumeration>
+				<enumeration value="Biologisk mangfold">
+				</enumeration>
+			</restriction>
+			<documentation>
+				Angir hva stikkrenne kulvert primært brukes til.
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="fundamentering">
+		<simpleType>
+			<restriction base="STRING">
+				<enumeration value="Grus">
+				</enumeration>
+				<enumeration value="Pukk">
+				</enumeration>
+				<enumeration value="Leire">
+				</enumeration>
+				<enumeration value="Stedlige masser">
+				</enumeration>
+				<enumeration value="Bunnplate">
+				</enumeration>
+				<enumeration value="Sålefundament">
+				</enumeration>
+				<enumeration value="Fjellfot">
+				</enumeration>
+			</restriction>
+			<documentation>
+				Angir hvordan stikkrenne/kulvert er fundamentert
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="materialtype">
+		<simpleType>
+			<restriction base="STRING">
+				<enumeration value="Tre">
+				</enumeration>
+				<enumeration value="Betong">
+				</enumeration>
+				<enumeration value="Stål">
+				</enumeration>
+				<enumeration value="Plast">
+				</enumeration>
+				<enumeration value="Naturstein">
+				</enumeration>
+				<enumeration value="Eternitt">
+				</enumeration>
+			</restriction>
+			<documentation>
+				Angir materialtype
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="tverrsnittsform">
+		<simpleType>
+			<restriction base="STRING">
+				<enumeration value="Sirkulær">
+				</enumeration>
+				<enumeration value="Rektangulær">
+				</enumeration>
+				<enumeration value="Flatbunnet med hvelv">
+				</enumeration>
+				<enumeration value="Ellipseform">
+				</enumeration>
+			</restriction>
+			<documentation>
+				Angir hvilken type tverrsnitt gjennomløpskonstruksjon har.
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="prefabrikkert">
+		<simpleType>
+			<restriction base="STRING">
+				<enumeration value="Plassprodusert">
+				</enumeration>
+				<enumeration value="Prefabrikkert, NS3121">
+				</enumeration>
+				<enumeration value="Prefabrikkert, ikke NS3121">
+				</enumeration>
+				<enumeration value="Prefabrikkert">
+				</enumeration>
+			</restriction>
+			<documentation>
+				Angir om gjennomløp er plassprodusert eller prefabrikkert. Bare aktuelt for stikkrenne/kulvert av betong
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="vinkel">
+		<simpleType>
+			<restriction base="STRING">
+				<enumeration value="Rett">
+				</enumeration>
+				<enumeration value="Skrå">
+				</enumeration>
+			</restriction>
+			<documentation>
+				Angir om vinkel mellom stikkrenna og veg som stikkrenna krysser er rett eller skrå.
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="byggeår">
+		<simpleType>
+			<restriction base="INTEGER">
+				<minInclusive value="-2147483648">
+				</minInclusive>
+				<maxInclusive value="2147483647">
+				</maxInclusive>
+				<maxLength value="4">
+				</maxLength>
+			</restriction>
+			<documentation>
+				Angir hvilket år stikkrenna ble bygd.
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="spesielleProblem">
+		<simpleType>
+			<restriction base="STRING">
+				<enumeration value="Vegetasjonstetting, innløp">
+				</enumeration>
+				<enumeration value="Vegetasjonstetting, utløp">
+				</enumeration>
+				<enumeration value="Masser, innløp">
+				</enumeration>
+				<enumeration value="Masser, utløp">
+				</enumeration>
+			</restriction>
+			<documentation>
+				Angir eventuelle spesielle problem knyttet til stikkrennen.  Dette er problem som stadig gjentar seg.
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="typeInnløp">
+		<simpleType>
+			<restriction base="STRING">
+				<enumeration value="Åpent i grøft">
+				</enumeration>
+				<enumeration value="Åpent i grøft med støtteskjold">
+				</enumeration>
+				<enumeration value="Åpent med frontmur">
+				</enumeration>
+				<enumeration value="Kum over stikkrenne">
+				</enumeration>
+			</restriction>
+			<documentation>
+				Angir hvilken type innløp det er i ei stikkrenne
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="typeUtløp">
+		<simpleType>
+			<restriction base="STRING">
+				<enumeration value="I skråning/terreng">
+				</enumeration>
+				<enumeration value="I bekk/elv">
+				</enumeration>
+				<enumeration value="Åpen grøft">
+				</enumeration>
+				<enumeration value="Kum">
+				</enumeration>
+			</restriction>
+			<documentation>
+				Angir hvilken type utløp det er i ei stikkrenne
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="tilknyttetLukkaDren">
+		<simpleType>
+			<restriction base="STRING">
+				<enumeration value="Nei">
+				</enumeration>
+				<enumeration value="Ja">
+				</enumeration>
+			</restriction>
+			<documentation>
+				Angir om stikkrenne er tilknytta lukka drenering. Vannet ledes inn i et lukket dreneringssystem.
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="antallTininger">
+		<simpleType>
+			<restriction base="INTEGER">
+				<documentation>
+					Enhet: Stykker (12)
+				</documentation>
+				<minInclusive value="0">
+				</minInclusive>
+				<maxInclusive value="99">
+				</maxInclusive>
+				<maxLength value="2">
+				</maxLength>
+			</restriction>
+			<documentation>
+				Angir hvor mange ganger stikkrenna vanligvis må tines i løpet av en vinter
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="produktinformasjon">
+		<simpleType>
+			<restriction base="STRING">
+			</restriction>
+			<documentation>
+				Angir produktinformasjon, først og fremst om selve røret
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="helningFall">
+		<simpleType>
+			<restriction base="REAL">
+				<documentation>
+					Enhet: Forholdstall (15)
+				</documentation>
+				<minInclusive value="-9.999">
+				</minInclusive>
+				<maxInclusive value="9.999">
+				</maxInclusive>
+				<fractionDigits value="4">
+				</fractionDigits>
+				<maxLength value="6">
+				</maxLength>
+			</restriction>
+			<documentation>
+				Angir fall på stikkrenne.  Angis alltid som positiv verdi.
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="varmekabler">
+		<simpleType>
+			<restriction base="STRING">
+				<enumeration value="Ja">
+				</enumeration>
+				<enumeration value="Nei">
+				</enumeration>
+			</restriction>
+			<documentation>
+				Angir om det er varmekabler eller ikke i tilknytning til vegobjektet
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="diameterInnvendig">
+		<simpleType>
+			<restriction base="INTEGER">
+				<documentation>
+					Enhet: Millimeter (4)
+				</documentation>
+				<minInclusive value="0">
+				</minInclusive>
+				<maxInclusive value="9999">
+				</maxInclusive>
+				<maxLength value="4">
+				</maxLength>
+			</restriction>
+			<documentation>
+				Angir innvendig diameter av gjennomløp.  Benyttes fortrinnsvis for sirkulære tverrsnitt
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="lengde">
+		<simpleType>
+			<restriction base="REAL">
+				<documentation>
+					Enhet: Meter (1)
+				</documentation>
+				<minInclusive value="0.0">
+				</minInclusive>
+				<maxInclusive value="300.0">
+				</maxInclusive>
+				<fractionDigits value="2">
+				</fractionDigits>
+				<maxLength value="6">
+				</maxLength>
+			</restriction>
+			<documentation>
+				Angir lengde av vegobjektet
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="tykkelseOverfylling">
+		<simpleType>
+			<restriction base="REAL">
+				<documentation>
+					Enhet: Meter (1)
+				</documentation>
+				<minInclusive value="0.0">
+				</minInclusive>
+				<maxInclusive value="99.9">
+				</maxInclusive>
+				<fractionDigits value="1">
+				</fractionDigits>
+				<maxLength value="4">
+				</maxLength>
+			</restriction>
+			<documentation>
+				Angir tykkelse overfylling av rørledning.  Det vil si gjennomsnittlig tykkelse fra topp av rørledning til topp dekke.
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="gjennomløpForElvBekk">
+		<simpleType>
+			<restriction base="STRING">
+				<enumeration value="Ja">
+				</enumeration>
+				<enumeration value="Nei">
+				</enumeration>
+			</restriction>
+			<documentation>
+				Angir om elv/bekk renner gjennom stikkrenne/kulvert
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="overfyllingInnløp">
+		<simpleType>
+			<restriction base="REAL">
+				<documentation>
+					Enhet: Meter (1)
+				</documentation>
+				<minInclusive value="0.0">
+				</minInclusive>
+				<maxInclusive value="99.9">
+				</maxInclusive>
+				<fractionDigits value="1">
+				</fractionDigits>
+				<maxLength value="4">
+				</maxLength>
+			</restriction>
+			<documentation>
+				Angir tykkelsen på overfylling ved innløp. Det vil si  tykkelse fra topp av stikkrenne til topp dekke.
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="overfyllingUtløp">
+		<simpleType>
+			<restriction base="REAL">
+				<documentation>
+					Enhet: Meter (1)
+				</documentation>
+				<minInclusive value="0.0">
+				</minInclusive>
+				<maxInclusive value="99.9">
+				</maxInclusive>
+				<fractionDigits value="1">
+				</fractionDigits>
+				<maxLength value="4">
+				</maxLength>
+			</restriction>
+			<documentation>
+				Angir tykkelsen på overfylling ved utløp. Det vil si  tykkelse fra topp av stikkrenne til topp dekke.
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="driftsmerking">
+		<simpleType>
+			<restriction base="STRING">
+			</restriction>
+			<documentation>
+				Gir unikt navn/id for objektet
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="eier">
+		<simpleType>
+			<restriction base="STRING">
+				<enumeration value="Fylkeskommune">
+				</enumeration>
+				<enumeration value="Stat">
+				</enumeration>
+				<enumeration value="Kommune">
+				</enumeration>
+				<enumeration value="Privat">
+				</enumeration>
+			</restriction>
+			<documentation>
+				Angir hvem som er eier av vegobjektet.
+			</documentation>
+		</simpleType>
+	</element>
+	<element name="vedlikeholdsansvarlig">
+		<simpleType>
+			<restriction base="STRING">
+				<enumeration value="Privat">
+				</enumeration>
+				<enumeration value="Kommune">
+				</enumeration>
+				<enumeration value="Statens vegvesen">
+				</enumeration>
+			</restriction>
+			<documentation>
+				Angir hvem som er ansvarlig for vedlikehold
+			</documentation>
+		</simpleType>
+	</element>
+</schema>
+
