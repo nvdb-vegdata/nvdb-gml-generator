@@ -3,6 +3,11 @@ package XsdParser.Parser;
 import XsdParser.XSD.Component.Schema;
 import XsdParser.XSD.Component.XSDComponent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 public class SchemaDefinition {
     private Schema schema;
     private XSDComponent currentXSDComponent;
@@ -18,6 +23,13 @@ public class SchemaDefinition {
 
     public void exitToParentComponent(){
         currentXSDComponent = currentXSDComponent.getParentComponent();
+    }
+
+    /**
+     * Method to remove element components flagged with "deprecated" from the schema definition
+     */
+    public void clean(){
+        schema.removeDeprecatedElements();
     }
 
     //Test method

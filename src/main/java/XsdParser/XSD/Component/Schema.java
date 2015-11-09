@@ -5,9 +5,11 @@ import XsdParser.XSD.XSDComponentAttribute;
 import XsdParser.XSD.XSDTag;
 import XsdParser.XSD.XSDTagAttribute;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Schema extends XSDComponent {
     private String xmlDocumentTag = XSDTag.XSD.toString();
@@ -31,6 +33,14 @@ public class Schema extends XSDComponent {
         return Optional.of(namespaces.get(prefix));
     }
 
+
+    public void removeDeprecatedElements(){
+        ArrayList<XSDComponent> updatedList =  getChildComponents()
+                .stream()
+                .filter(child -> !child.isDeprecated())
+                .collect(Collectors.toCollection(ArrayList<XSDComponent>::new));
+        setChildComponents(updatedList);
+    }
     @Override
     protected AllowedAttributesContainer setLegalAttributes() {
         AllowedAttributesContainer attributesContainer = new AllowedAttributesContainer();
