@@ -14,17 +14,11 @@ import XsdParser.XSD.Component.XSDStringFormatter;
 import XsdParser.XSD.Namespace;
 import XsdParser.XSD.XSDComponentAttribute;
 import XsdParser.XSD.XSDTagAttribute;
-import com.sun.javafx.binding.StringFormatter;
 import no.svv.nvdb.api.inn.domain.datacatalog.attribute.*;
 import no.svv.nvdb.api.inn.domain.datacatalog.constraint.EnumStringAttribute;
 
-import javax.print.Doc;
 import java.security.InvalidParameterException;
-import java.sql.Time;
-import java.text.Normalizer;
-import java.util.ArrayList;
 import java.util.Optional;
-import java.util.OptionalLong;
 
 public class ObjXsdParser implements ObjectParser {
     private Schema schema;
@@ -53,13 +47,14 @@ public class ObjXsdParser implements ObjectParser {
             component = createTimeAttribute((TimeAttributeType)object);
         } else if(object instanceof DateAttributeType){
             component = createDateAttribute((DateAttributeType)object);
+        } else if(object instanceof ShortDateAttributeType){
+            component = createShortDateAttribute((ShortDateAttributeType)object);
         }
         return Optional.ofNullable(component);
     }
 
     private XSDComponent createTimeAttribute(TimeAttributeType at){
         Restriction restriction = new Restriction("string");
-        Annotation annotation = createGeneralAnnotation(at);
         SimpleType simpleType = new SimpleType(restriction);
 
         Optional<String> pattern = getRegexFromTimeFormat(at.getFormat());
@@ -69,14 +64,25 @@ public class ObjXsdParser implements ObjectParser {
         XSDComponent patternFacet = new PatternFacet(pattern.get());
         simpleType.addChildComponent(patternFacet, simpleType);
 
-        ArrayList<XSDComponent> children = new ArrayList<>();
-        children.add(annotation);
-        return createElement(at, simpleType, children);
+        return createElement(at, simpleType);
     }
 
     private XSDComponent createDateAttribute(DateAttributeType at){
         Restriction restriction = new Restriction("string");
-        Annotation annotation = createGeneralAnnotation(at);
+        SimpleType simpleType = new SimpleType(restriction);
+
+        Optional<String> regexPattern = getRegexFromDateFormat(at.getFormat());
+        if(!regexPattern.isPresent()){
+            throw new InvalidParameterException(at.getFormat() + " dateFormat not supported");
+        }
+
+        XSDComponent patternFacet = new PatternFacet(regexPattern.get());
+        simpleType.addChildComponent(patternFacet, simpleType);
+        return createElement(at, simpleType);
+    }
+
+    private XSDComponent createShortDateAttribute(ShortDateAttributeType at){
+        Restriction restriction = new Restriction("string");
         SimpleType simpleType = new SimpleType(restriction);
 
         Optional<String> regexPattern = getRegexFromDateFormat(at.getFormat());
@@ -87,10 +93,10 @@ public class ObjXsdParser implements ObjectParser {
         XSDComponent patternFacet = new PatternFacet(regexPattern.get());
         simpleType.addChildComponent(patternFacet, simpleType);
 
-        ArrayList<XSDComponent> children = new ArrayList<>();
-        children.add(annotation);
-        return createElement(at, simpleType, children);
+        return createElement(at, simpleType);
     }
+
+
 
 
 
@@ -101,11 +107,7 @@ public class ObjXsdParser implements ObjectParser {
     private XSDComponent createStringAttribute(StringAttributeType at){
         Restriction restriction = new Restriction(at.getType().toString().toLowerCase());
         SimpleType simpleType = new SimpleType(restriction);
-        Annotation annotation =  createGeneralAnnotation(at);
-
-        ArrayList<XSDComponent> children = new ArrayList<>();
-        children.add(annotation);
-        return createElement(at, simpleType, children);
+        return createElement(at, simpleType);
     }
     private XSDComponent createIntegerAttribute(IntegerAttributeType at){
         Restriction restriction = new Restriction(at.getType().toString().toLowerCase());
@@ -124,18 +126,26 @@ public class ObjXsdParser implements ObjectParser {
         simpleType.addChildComponent(maxInclusive,restriction);
         simpleType.addChildComponent(maxLength,restriction);
 
-        Annotation annotation = createGeneralAnnotation(at);
-        ArrayList<XSDComponent> children = new ArrayList<>();
-        children.add(annotation);
-        return createElement(at, simpleType, children);
+        return createElement(at, simpleType);
     }
 
     private XSDComponent createRealAttribute(RealAttributeType at){
         Restriction restriction = new Restriction("decimal");
-        XSDComponent maxInclusive = new MaxInclusiveFacet(at.getAbsoluteMaxValue().toString());
-        XSDComponent minInclusive = new MinInclusiveFacet(at.getAbsoluteMinValue().toString());
-        XSDComponent fractionDigits = new FractionDigitsFacet(at.getNumDecimals().toString());
-        if(at.getUnit() != null){
+
+        if( at.getAbsoluteMaxValue() != null && at.getAbsoluteMinValue() != null){
+            XSDComponent maxInclusive = new MaxInclusiveFacet(at.getAbsoluteMaxValue().toString());
+            XSDComponent minInclusive = new MinInclusiveFacet(at.getAbsoluteMinValue().toString());
+            restriction.addChildComponent(minInclusive,restriction);
+            restriction.addChildComponent(maxInclusive,restriction);
+        }
+
+        if(at.getNumDecimals() != null){
+            XSDComponent fractionDigits = new FractionDigitsFacet(at.getNumDecimals().toString());
+            restriction.addChildComponent(fractionDigits,restriction);
+        }
+
+
+        if(at.getUnit() != null ){
             Documentation unitDocumentation = new Documentation("Enhet: " + at.getUnit());
             Annotation annotation = new Annotation();
             annotation.addChildComponent(unitDocumentation,annotation);
@@ -143,15 +153,9 @@ public class ObjXsdParser implements ObjectParser {
         }
 
         SimpleType simpleType = new SimpleType(restriction);
-        restriction.addChildComponent(minInclusive,restriction);
-        restriction.addChildComponent(maxInclusive,restriction);
-        restriction.addChildComponent(fractionDigits,restriction);
 
-        Annotation annotation = createGeneralAnnotation(at);
 
-        ArrayList<XSDComponent> children = new ArrayList<>();
-        children.add(annotation);
-        return createElement(at, simpleType, children);
+        return createElement(at, simpleType);
     }
 
     private Annotation createGeneralAnnotation(AttributeType at) {
@@ -164,12 +168,13 @@ public class ObjXsdParser implements ObjectParser {
 
     }
 
-    private Element createElement(AttributeType at, SimpleType simpleType, ArrayList<XSDComponent> childrenComponents){
 
+    private Element createElement(AttributeType at, XSDComponent component){
+        Annotation annotation = createGeneralAnnotation(at);
         String elementName = XSDStringFormatter.createElementName(at.getName());
         XSDComponentAttribute nameAttribute = new XSDComponentAttribute(XSDTagAttribute.NAME,elementName);
-        Element element = new Element(nameAttribute, simpleType);
-        childrenComponents.forEach(child -> element.addChildComponent(child, element));
+        Element element = new Element(nameAttribute, component);
+        element.addChildComponent(annotation, element);
         if(isDeprecated(at.getName())){
             element.setDeprecated(true);
         }
