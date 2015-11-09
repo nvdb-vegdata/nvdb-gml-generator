@@ -17,6 +17,10 @@ public class WhiteSpaceFacet extends RestrictionFacet{
         super(xsdComponentAttribute);
     }
 
+    public WhiteSpaceFacet(String value) {
+        super(value);
+    }
+
     @Override
     protected XSDTag setInitialXsdTag() {
         return XSDTag.WHITESPACE;

@@ -17,6 +17,10 @@ public class MaxExclusiveFacet extends RestrictionFacet {
         super(xsdComponentAttribute);
     }
 
+    public MaxExclusiveFacet(String value) {
+        super(value);
+    }
+
     @Override
     protected XSDTag setInitialXsdTag() {
         return XSDTag.MAXEXCLUSIVE;

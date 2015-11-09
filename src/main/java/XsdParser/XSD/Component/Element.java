@@ -58,10 +58,10 @@ public class Element extends XSDComponent {
     public String unLoad() {
         String[] res = {""};
         res[0] += getStartTag();
+        getChildComponents().forEach(child -> res[0] += child.unLoad());
         if (hasComponent()){
             res[0] += component.unLoad();
         }
-        getChildComponents().forEach(child -> res[0] += child.unLoad());
         res[0] += getEndTag();
         return res[0];
     }

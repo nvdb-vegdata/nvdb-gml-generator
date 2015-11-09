@@ -27,13 +27,12 @@ public class Master {
             try{
                 DataCatalog dc =  DataCatalog.fromJson((InputStream) apiGateway.getDataCatalog());
                 dc.featureTypes()
-                        .filter(featureType -> featureType.getName().contains("Stikkrenne"))
+                        .filter(featureType -> featureType.getName().contains("Bomstasjon"))
                         .forEach(featureType -> generateXSDFromFeatureType(featureType));
-
 
             }catch (Exception e){
                 System.out.println("----- Failed when fetching the datacatalog ------");
-                System.out.print(e);
+                System.out.print(e.fillInStackTrace());
             }
         }catch (Exception e){
             System.out.println("----- Failed when creating gateway ------ ");
@@ -43,26 +42,30 @@ public class Master {
     }
 
     private static void generateXSDFromFeatureType(FeatureType featureType){
+        if(featureType == null)return;
         ObjectParser parser = new ObjXsdParser();
         XsdBuilder builder = new XsdBuilder(parser);
         SchemaDefinition schemaDefinition = builder.generateSchemaDefinition(featureType.attributeTypes().toArray());
 
         System.out.println(schemaDefinition.unLoad());
         //test(featureType);
+
+    }
+
+    private void printToFile(String schema){
         try {
             PrintWriter writer = new PrintWriter("Stikkrenne.xsd", "UTF-8");
-            writer.println(schemaDefinition.unLoad());
+            writer.println(schema);
             writer.close();
         } catch (Exception e) {
             System.out.println("what " + e);
         }
-
     }
 
     //region Test region
     private static void test(FeatureType featureType){
         System.out.println(featureType.getName());
-        System.out.println(featureType.getDescription());
+        //System.out.println(featureType.getDescription());
         handleAttributeTypes(featureType);
     }
 
@@ -71,23 +74,17 @@ public class Master {
                 .forEach(attributeType -> {
                     if(attributeType instanceof IntegerAttributeType || attributeType instanceof StringAttributeType || attributeType instanceof RealAttributeType){
 
-                    }else{
+                    }else if( attributeType instanceof PrimitiveAttributeType){
+                        System.out.println("--- Found PrimitiveAttributeType ---");
+                        System.out.println(attributeType.getDescription());
+                        System.out.println(attributeType.getClass().getSimpleName());
 
-                        if(attributeType instanceof ListAttributeType){
-                            System.out.println("     " + attributeType.getType() + " --- " + attributeType.getClass().getSimpleName());
-                            ListAttributeType la = (ListAttributeType)attributeType;
-                            handleCorrectAttributeType(attributeType);
-                            System.out.println("         " + la.getRequirement());
-                            System.out.println("         " + la.getContentType().getType());
-                            AttributeType at = la.getContentType();
-                            System.out.println("         " + at.toString());
+                        if(attributeType instanceof TimeAttributeType){
+                            TimeAttributeType ta = (TimeAttributeType)attributeType;
+                            System.out.println(ta.getFormat());
+
 
                         }
-
-
-
-
-
                     }
 
 

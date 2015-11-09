@@ -17,6 +17,10 @@ public class FractionDigitsFacet extends RestrictionFacet {
         super(xsdComponentAttribute);
     }
 
+    public FractionDigitsFacet(String value) {
+        super(value);
+    }
+
     @Override
     protected XSDTag setInitialXsdTag() {
         return XSDTag.FRACTIONDIGITS;

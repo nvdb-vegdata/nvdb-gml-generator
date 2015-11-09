@@ -17,6 +17,10 @@ public class MinLengthFacet extends RestrictionFacet {
         super(xsdComponentAttribute);
     }
 
+    public MinLengthFacet(String value) {
+        super(value);
+    }
+
     @Override
     protected XSDTag setInitialXsdTag() {
         return XSDTag.MINLENGTH;

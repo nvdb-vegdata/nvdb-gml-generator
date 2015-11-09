@@ -17,6 +17,10 @@ public class MinInclusiveFacet extends RestrictionFacet {
         super(xsdComponentAttribute);
     }
 
+    public MinInclusiveFacet(String value) {
+        super(value);
+    }
+
     @Override
     protected XSDTag setInitialXsdTag() {
         return XSDTag.MININCLUSIVE;

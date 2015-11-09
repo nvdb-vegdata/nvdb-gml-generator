@@ -17,6 +17,10 @@ public class TotalDigitsFacet extends RestrictionFacet {
         super(xsdComponentAttribute);
     }
 
+    public TotalDigitsFacet(String value) {
+        super(value);
+    }
+
     @Override
     protected XSDTag setInitialXsdTag() {
         return XSDTag.TOTALDIGITS;

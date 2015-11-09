@@ -72,7 +72,7 @@ public abstract class XSDComponent {
         String[] res = {""};
         res[0] += getStartTag();
         getChildComponents().forEach(child -> res[0] += child.unLoad());
-        res[0] += addTab() + getEndTag();
+        res[0] += getEndTag();
         return res[0];
     }
 

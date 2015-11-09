@@ -17,6 +17,10 @@ public class LengthFacet extends RestrictionFacet {
         super(xsdComponentAttribute);
     }
 
+    public LengthFacet(String value) {
+        super(value);
+    }
+
     @Override
     protected XSDTag setInitialXsdTag() {
         return XSDTag.LENGTH;

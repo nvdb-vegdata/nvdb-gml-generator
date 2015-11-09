@@ -17,6 +17,10 @@ public class EnumerationFacet extends RestrictionFacet {
         super(xsdComponentAttribute);
     }
 
+    public EnumerationFacet(String value) {
+        super(value);
+    }
+
     @Override
     protected XSDTag setInitialXsdTag() {
         return XSDTag.ENUMERATION;
