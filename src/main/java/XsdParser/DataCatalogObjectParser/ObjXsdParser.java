@@ -51,6 +51,8 @@ public class ObjXsdParser implements ObjectParser {
             component = createRealAttribute((RealAttributeType)object);
         } else if(object instanceof TimeAttributeType){
             component = createTimeAttribute((TimeAttributeType)object);
+        } else if(object instanceof DateAttributeType){
+            component = createDateAttribute((DateAttributeType)object);
         }
         return Optional.ofNullable(component);
     }
@@ -62,9 +64,27 @@ public class ObjXsdParser implements ObjectParser {
 
         Optional<String> pattern = getRegexFromTimeFormat(at.getFormat());
         if(!pattern.isPresent()){
-            throw new InvalidParameterException(at.getFormat() + " timeformat not supported");
+            throw new InvalidParameterException(at.getFormat() + " timeFormat not supported");
         }
         XSDComponent patternFacet = new PatternFacet(pattern.get());
+        simpleType.addChildComponent(patternFacet, simpleType);
+
+        ArrayList<XSDComponent> children = new ArrayList<>();
+        children.add(annotation);
+        return createElement(at, simpleType, children);
+    }
+
+    private XSDComponent createDateAttribute(DateAttributeType at){
+        Restriction restriction = new Restriction("string");
+        Annotation annotation = createGeneralAnnotation(at);
+        SimpleType simpleType = new SimpleType(restriction);
+
+        Optional<String> regexPattern = getRegexFromDateFormat(at.getFormat());
+        if(!regexPattern.isPresent()){
+            throw new InvalidParameterException(at.getFormat() + " dateFormat not supported");
+        }
+
+        XSDComponent patternFacet = new PatternFacet(regexPattern.get());
         simpleType.addChildComponent(patternFacet, simpleType);
 
         ArrayList<XSDComponent> children = new ArrayList<>();
@@ -145,13 +165,14 @@ public class ObjXsdParser implements ObjectParser {
     }
 
     private Element createElement(AttributeType at, SimpleType simpleType, ArrayList<XSDComponent> childrenComponents){
-        if(isDeprecated(at.getName())){
-            return null;
-        }
+
         String elementName = XSDStringFormatter.createElementName(at.getName());
         XSDComponentAttribute nameAttribute = new XSDComponentAttribute(XSDTagAttribute.NAME,elementName);
         Element element = new Element(nameAttribute, simpleType);
         childrenComponents.forEach(child -> element.addChildComponent(child, element));
+        if(isDeprecated(at.getName())){
+            element.setDeprecated(true);
+        }
         return element;
     }
 
@@ -170,6 +191,26 @@ public class ObjXsdParser implements ObjectParser {
                 break;
             case "hh:mm:ss":
                 regex = "^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$";
+                break;
+        }
+        return Optional.ofNullable(regex);
+    }
+
+    private Optional<String> getRegexFromDateFormat(String dateFormat){
+        String regex = null;
+
+        switch (dateFormat){
+            case "åååå-mm-dd":
+                regex = "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$";
+                break;
+            case "ååååmmdd":
+                regex = "^[0-9]{4}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$";
+                break;
+            case "mm-dd":
+                regex = "^(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$";
+                break;
+            case "mmdd":
+                regex = "^(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$";
                 break;
         }
         return Optional.ofNullable(regex);

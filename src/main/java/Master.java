@@ -27,7 +27,7 @@ public class Master {
             try{
                 DataCatalog dc =  DataCatalog.fromJson((InputStream) apiGateway.getDataCatalog());
                 dc.featureTypes()
-                        .filter(featureType -> featureType.getName().contains("Bomstasjon"))
+                        .filter(featureType -> featureType.getName().equals("Skred"))
                         .forEach(featureType -> generateXSDFromFeatureType(featureType));
 
             }catch (Exception e){
@@ -46,7 +46,7 @@ public class Master {
         ObjectParser parser = new ObjXsdParser();
         XsdBuilder builder = new XsdBuilder(parser);
         SchemaDefinition schemaDefinition = builder.generateSchemaDefinition(featureType.attributeTypes().toArray());
-
+        schemaDefinition.clean();
         System.out.println(schemaDefinition.unLoad());
         //test(featureType);
 
@@ -58,7 +58,7 @@ public class Master {
             writer.println(schema);
             writer.close();
         } catch (Exception e) {
-            System.out.println("what " + e);
+            System.out.println("Error when printing schema to file " + e);
         }
     }
 
@@ -72,12 +72,11 @@ public class Master {
     private static void handleAttributeTypes(FeatureType featureType){
         featureType.attributeTypes()
                 .forEach(attributeType -> {
-                    if(attributeType instanceof IntegerAttributeType || attributeType instanceof StringAttributeType || attributeType instanceof RealAttributeType){
+                    handleCorrectAttributeType(attributeType);
+                    if(attributeType instanceof IntegerAttributeType || attributeType instanceof RealAttributeType){
 
                     }else if( attributeType instanceof PrimitiveAttributeType){
-                        System.out.println("--- Found PrimitiveAttributeType ---");
-                        System.out.println(attributeType.getDescription());
-                        System.out.println(attributeType.getClass().getSimpleName());
+
 
                         if(attributeType instanceof TimeAttributeType){
                             TimeAttributeType ta = (TimeAttributeType)attributeType;
@@ -92,10 +91,12 @@ public class Master {
     }
     private static void handleCorrectAttributeType(AttributeType attributeType){
 
-        if ( attributeType instanceof ListAttributeType ){
-
-            if ( attributeType.getEnumValues() != null ) {
-                attributeType.getEnumValues().forEach( (k,v) -> {
+        if ( attributeType instanceof StringAttributeType ){
+            StringAttributeType st = (StringAttributeType)attributeType;
+            System.out.println(st.getName());
+            if ( st.getEnumValues() != null ) {
+                System.out.println("has enum values!!!!!!!!!");
+                st.getEnumValues().forEach( (k,v) -> {
                     System.out.println("                " + v.toString() + " of type: ");
 
 

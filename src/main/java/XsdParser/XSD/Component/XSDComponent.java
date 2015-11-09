@@ -5,6 +5,7 @@ import XsdParser.XSD.Namespace;
 import XsdParser.XSD.XSDComponentAttribute;
 import XsdParser.XSD.XSDTag;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -17,6 +18,15 @@ public abstract class XSDComponent {
     private ArrayList<XSDComponent> childComponents;
     private XSDComponent parentComponent;
     private Namespace namespace;
+    private boolean deprecated = false;
+
+    public boolean isDeprecated() {
+        return deprecated;
+    }
+
+    public void setDeprecated(boolean deprecated) {
+        this.deprecated = deprecated;
+    }
 
     private int getDepth(int depth, XSDComponent component){
         if(component.getParentComponent() == null){
@@ -127,7 +137,9 @@ public abstract class XSDComponent {
         return parentComponent != null;
     }
 
-
+    public void setChildComponents(ArrayList<XSDComponent> childComponents){
+        this.childComponents = childComponents;
+    }
 
     public XSDTag getXsdTag() {
         return xsdTag;
