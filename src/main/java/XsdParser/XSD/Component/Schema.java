@@ -34,7 +34,7 @@ public class Schema extends XSDComponent {
     @Override
     protected AllowedAttributesContainer setLegalAttributes() {
         AllowedAttributesContainer attributesContainer = new AllowedAttributesContainer();
-        attributesContainer.addLegalAttribute(XSDTagAttribute.XLMNS);
+        attributesContainer.addLegalAttribute(XSDTagAttribute.XMLNS);
         attributesContainer.addLegalAttribute(XSDTagAttribute.ELEMENTFORMDEFAULT);
         attributesContainer.addLegalAttribute(XSDTagAttribute.TARGETNAMESPACE);
         attributesContainer.addLegalAttribute(XSDTagAttribute.VERSION);

@@ -6,7 +6,7 @@ package XsdParser.XSD;
 
 public enum XSDTagAttribute {
     ID("id"),
-    XLMNS("xlmns"),
+    XMLNS("xmlns"),
     NAMESPACE("namespace"),
     ELEMENTFORMDEFAULT("elementFormDefault"),
     TARGETNAMESPACE("targetNamespace"),
@@ -19,6 +19,7 @@ public enum XSDTagAttribute {
     VERSION("version"),
     TYPE("type"),
     SUBSTITUTIONGROUP("subtitutiongroup"),
+    SOURCE("source"),
     ABSTRACT("abstract");
 
     private final String text;

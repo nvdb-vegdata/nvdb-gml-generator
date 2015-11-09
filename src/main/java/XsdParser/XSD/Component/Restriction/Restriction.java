@@ -20,6 +20,10 @@ public class Restriction extends XSDComponent {
         super(xsdComponentAttribute);
     }
 
+    public Restriction(String type){
+        super(new XSDComponentAttribute(XSDTagAttribute.BASE,type));
+    }
+
     public Restriction() {
         super();
     }

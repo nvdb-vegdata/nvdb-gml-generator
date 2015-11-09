@@ -17,6 +17,10 @@ public class PatternFacet extends RestrictionFacet {
         super(xsdComponentAttribute);
     }
 
+    public PatternFacet(String value) {
+        super(value);
+    }
+
     @Override
     protected XSDTag setInitialXsdTag() {
         return XSDTag.PATTERN;

@@ -20,6 +20,10 @@ public class RestrictionFacet extends XSDComponent {
         super(xsdComponentAttribute);
     }
 
+    public RestrictionFacet(String value) {
+        super(new XSDComponentAttribute(XSDTagAttribute.VALUE, value));
+    }
+
     @Override
     protected XSDTag setInitialXsdTag() {
         return null;

@@ -7,6 +7,7 @@ public enum XSDTag{
     SCHEMA("schema"),
     IMPORT("import"),
     ANNOTATION("annotation"),
+    APPINFO("appinfo"),
     DOCUMENTATION("documentation"),
     SIMPLETYPE("simpleType"),
     COMPLEXTYPE("complexType"),

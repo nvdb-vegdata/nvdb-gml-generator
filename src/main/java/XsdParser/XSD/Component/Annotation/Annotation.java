@@ -9,7 +9,7 @@ public class Annotation extends XSDComponent {
 
     @Override
     protected XSDTag setInitialXsdTag() {
-        return null;
+        return XSDTag.ANNOTATION;
     }
 
     @Override
