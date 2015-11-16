@@ -10,11 +10,14 @@ public class XSDStringFormatter {
     }
 
     private static String toCamelCase(String text){
+        text = text.trim();
         String[] words = text.split("[^\\p{L}]");
         if(words.length == 0)
             return "";
+
         String camelCaseName = "";
-        camelCaseName += words[0].substring(0,1).toLowerCase() + words[0].substring(1);
+        if(!words[0].isEmpty())
+            camelCaseName += words[0].substring(0,1).toLowerCase() + words[0].substring(1);
         for(int i = 1; i < words.length; i++){
             if(words[i].isEmpty())
                 continue;

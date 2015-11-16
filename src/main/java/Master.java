@@ -4,10 +4,12 @@ import XsdParser.Parser.ObjectParser;
 import XsdParser.Parser.XsdBuilder;
 import no.svv.nvdb.api.inn.domain.datacatalog.DataCatalog;
 import no.svv.nvdb.api.inn.domain.datacatalog.FeatureType;
+import no.svv.nvdb.api.inn.domain.datacatalog.association.AssociationType;
 import no.svv.nvdb.api.inn.domain.datacatalog.attribute.*;
 import restaccess.NvdbWriteApiGateway;
 
 import java.io.*;
+import java.util.Date;
 
 
 public class Master {
@@ -27,12 +29,12 @@ public class Master {
             try{
                 DataCatalog dc =  DataCatalog.fromJson((InputStream) apiGateway.getDataCatalog());
                 dc.featureTypes()
-                        .filter(featureType -> featureType.getName().equals("Skred"))
+                        .filter(featureType -> featureType.getName().contains(""))
                         .forEach(featureType -> generateXSDFromFeatureType(featureType));
 
             }catch (Exception e){
                 System.out.println("----- Failed when fetching the datacatalog ------");
-                System.out.print(e.fillInStackTrace());
+                e.printStackTrace();
             }
         }catch (Exception e){
             System.out.println("----- Failed when creating gateway ------ ");
@@ -47,8 +49,8 @@ public class Master {
         XsdBuilder builder = new XsdBuilder(parser);
         SchemaDefinition schemaDefinition = builder.generateSchemaDefinition(featureType.attributeTypes().toArray());
         schemaDefinition.clean();
-        System.out.println(schemaDefinition.unLoad());
-        //test(featureType);
+        //System.out.println(schemaDefinition.unLoad());
+        test(featureType);
 
     }
 
@@ -64,26 +66,28 @@ public class Master {
 
     //region Test region
     private static void test(FeatureType featureType){
-        System.out.println(featureType.getName());
-        //System.out.println(featureType.getDescription());
+        System.out.println("" + featureType.getName() + "");
         handleAttributeTypes(featureType);
     }
 
     private static void handleAttributeTypes(FeatureType featureType){
         featureType.attributeTypes()
                 .forEach(attributeType -> {
-                    handleCorrectAttributeType(attributeType);
-                    if(attributeType instanceof IntegerAttributeType || attributeType instanceof RealAttributeType){
+                    //System.out.println(attributeType.getType());
+                    if(attributeType instanceof IntegerAttributeType || attributeType instanceof RealAttributeType
+                            || attributeType instanceof StringAttributeType || attributeType instanceof BoolAttributeType
+                            || attributeType instanceof DateAttributeType || attributeType instanceof ShortDateAttributeType
+                            || attributeType instanceof TimeAttributeType || attributeType == null
+                            || attributeType instanceof ListAttributeType || attributeType instanceof LocationalAttributeType
+                            || attributeType instanceof AssociationType || attributeType instanceof SpatialAttributeType){
 
-                    }else if( attributeType instanceof PrimitiveAttributeType){
+                    }else{
 
 
-                        if(attributeType instanceof TimeAttributeType){
-                            TimeAttributeType ta = (TimeAttributeType)attributeType;
-                            System.out.println(ta.getFormat());
+                        System.out.println("Name: " + attributeType.getName());
+                        System.out.println("Desc: " + attributeType.getDescription());
+                        System.out.println("Type: " + attributeType.getType());
 
-
-                        }
                     }
 
 
@@ -93,9 +97,8 @@ public class Master {
 
         if ( attributeType instanceof StringAttributeType ){
             StringAttributeType st = (StringAttributeType)attributeType;
-            System.out.println(st.getName());
             if ( st.getEnumValues() != null ) {
-                System.out.println("has enum values!!!!!!!!!");
+                System.out.println(st.getName() + ", -- enum values");
                 st.getEnumValues().forEach( (k,v) -> {
                     System.out.println("                " + v.toString() + " of type: ");
 
