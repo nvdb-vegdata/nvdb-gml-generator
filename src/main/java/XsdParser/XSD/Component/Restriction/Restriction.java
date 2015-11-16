@@ -1,20 +1,17 @@
 package XsdParser.XSD.Component.Restriction;
 
+import XsdParser.XSD.*;
 import XsdParser.XSD.Component.AllowedAttributesContainer;
 import XsdParser.XSD.Component.Element;
 import XsdParser.XSD.Component.SimpleType.SimpleType;
 import XsdParser.XSD.Component.XSDComponent;
-import XsdParser.XSD.Namespace;
-import XsdParser.XSD.XSDComponentAttribute;
-import XsdParser.XSD.XSDTag;
-import XsdParser.XSD.XSDTagAttribute;
 
 import java.util.ArrayList;
 
 public class Restriction extends XSDComponent {
 
-    public Restriction(String type, Namespace namespace){
-        super(new XSDComponentAttribute(XSDTagAttribute.BASE,type), namespace);
+    public Restriction(XSDDataType dataType, Namespace namespace){
+        super(new XSDComponentAttribute(XSDTagAttribute.BASE, dataType.toStringWithPrefix(namespace)), namespace);
     }
 
     public Restriction(ArrayList<XSDComponentAttribute> xsdComponentAttributes, Namespace nameSpace) {
