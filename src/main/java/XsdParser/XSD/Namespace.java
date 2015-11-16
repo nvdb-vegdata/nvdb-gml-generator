@@ -18,7 +18,8 @@ public class Namespace extends XSDComponentAttribute{
 
     @Override
     public String toString(){
-        return " " + getXsdTagAttribute().toString()+":" + prefix + "=" + "\"" + getValue() + "\"";
+        String res = getPrefix().isPresent() ? ":" +  getPrefix().get() : "";
+        return " " + getXsdTagAttribute().toString()+ res + "=" + "\"" + getValue() + "\"";
     }
 
     public Optional<String> getPrefix() {

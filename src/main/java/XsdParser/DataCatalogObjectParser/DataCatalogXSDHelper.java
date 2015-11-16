@@ -75,4 +75,21 @@ public class DataCatalogXSDHelper {
         return dataType;
 
     }
+    public static Optional<String> getGmlTypeFromSpatial(SpatialType type){
+        String res = null;
+        switch (type){
+            case POINT:
+                res = "PointPropertyType";
+                break;
+            case POLYGON:
+                res = "SurfacePropertyType";
+                break;
+            case LINE:
+                res = "CurvePropertyType";
+                break;
+
+        }
+        return Optional.ofNullable(res);
+
+    }
 }
