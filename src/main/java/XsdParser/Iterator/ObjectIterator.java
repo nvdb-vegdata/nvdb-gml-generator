@@ -44,34 +44,35 @@ public class ObjectIterator implements IObjectIterator {
         return false;
     }*/
     public boolean iterate() {
-        boolean test;
+        boolean continueIterate;
         do{
             if (property != null) {
                 if (!isSingleValued(property) && !visitedProperties.contains(property)) {
                     visitedProperties.add(property);
                     IObjectIterator childIterator = createIteratorFor(property);
                     enterChildProperty(childIterator);
-                    test = true;
+                    continueIterate = true;
                     continue;
                 }
             }
 
             if(iterateCurrentIterator()){
-                test = true;
+                continueIterate = true;
                 continue;
             }
 
             if (hasParentProperty()) {
                 exitToParentProperty();
-                test = true;
+                continueIterate = true;
                 continue;
             }
 
-            test =  false;
+            continueIterate =  false;
         }
-        while(test);
+        while(continueIterate);
 
-        return test;
+        //TODO Return value not used anymore, method converted from recursion to iteration, should be changed
+        return continueIterate;
     }
     private boolean hasParentProperty(){
         return iteratorStack.size() > 0;
