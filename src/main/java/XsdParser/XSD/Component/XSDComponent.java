@@ -4,6 +4,7 @@ import XsdParser.XSD.Component.Restriction.Restriction;
 import XsdParser.XSD.Namespace;
 import XsdParser.XSD.XSDComponentAttribute;
 import XsdParser.XSD.XSDTag;
+import XsdParser.XSD.Namespace;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -19,6 +20,38 @@ public abstract class XSDComponent {
     private XSDComponent parentComponent;
     private Namespace namespace;
     private boolean deprecated = false;
+
+
+
+    //region Constructor
+    public XSDComponent(ArrayList<XSDComponentAttribute> xsdComponentAttributes, Namespace namespace) {
+        this.namespace = namespace;
+        legalAttributesContainer = setLegalAttributes();
+        this.xsdTag = setInitialXsdTag();
+        this.xsdComponentAttributes = xsdComponentAttributes;
+        childComponents = new ArrayList<>();
+        checkForLegalComponentAttributes();
+    }
+
+    public XSDComponent(XSDComponentAttribute xsdComponentAttribute, Namespace namespace){
+        this.namespace = namespace;
+        legalAttributesContainer = setLegalAttributes();
+        this.xsdTag = setInitialXsdTag();
+        this.xsdComponentAttributes = new ArrayList<>();
+        xsdComponentAttributes.add(xsdComponentAttribute);
+        childComponents = new ArrayList<>();
+        checkForLegalComponentAttributes();
+    }
+
+    public XSDComponent(Namespace namespace) {
+        this.namespace = namespace;
+        legalAttributesContainer = setLegalAttributes();
+        this.xsdTag = setInitialXsdTag();
+        this.xsdComponentAttributes = new ArrayList<>();
+        childComponents = new ArrayList<>();
+        checkForLegalComponentAttributes();
+    }
+    //endregion
 
     public boolean isDeprecated() {
         return deprecated;
@@ -46,30 +79,7 @@ public abstract class XSDComponent {
         this.namespace = namespace;
     }
 
-    public XSDComponent(ArrayList<XSDComponentAttribute> xsdComponentAttributes) {
-        this.xsdTag = setInitialXsdTag();
-        this.xsdComponentAttributes = xsdComponentAttributes;
-        childComponents = new ArrayList<>();
-        checkForLegalComponentAttributes();
-        legalAttributesContainer = setLegalAttributes();
-    }
 
-    public XSDComponent(XSDComponentAttribute xsdComponentAttribute){
-        this.xsdTag = setInitialXsdTag();
-        this.xsdComponentAttributes = new ArrayList<>();
-        xsdComponentAttributes.add(xsdComponentAttribute);
-        childComponents = new ArrayList<>();
-        legalAttributesContainer = setLegalAttributes();
-        checkForLegalComponentAttributes();
-    }
-
-    public XSDComponent() {
-        this.xsdTag = setInitialXsdTag();
-        this.xsdComponentAttributes = new ArrayList<>();
-        childComponents = new ArrayList<>();
-        legalAttributesContainer = setLegalAttributes();
-        checkForLegalComponentAttributes();
-    }
     public void addXSDComponentAttribute(XSDComponentAttribute xsdComponentAttribute){
         xsdComponentAttributes.add(xsdComponentAttribute);
     }
@@ -146,15 +156,22 @@ public abstract class XSDComponent {
     }
 
     public String getStartTag(){
-        final String[] startTag = { addTab() + starter + xsdTag.toString()};
+        final String[] startTag = { addTab() + starter + getPrefixString() + xsdTag.toString()};
         if(xsdComponentAttributes == null || xsdComponentAttributes.isEmpty()){
             return startTag[0] + ender +"\n";
         }
         xsdComponentAttributes.forEach(tagAttribute -> startTag[0] += tagAttribute);
         return startTag[0] + ender +"\n";
     }
+
+    private String getPrefixString(){
+        if(namespace.getPrefix().isPresent()){
+            return namespace.getPrefix().get() + ":";
+        }
+        return "";
+    }
     public String getEndTag( ){
-        return addTab() + starter +"/" + xsdTag.toString() + ender +"\n";
+        return addTab() + starter +"/"+ getPrefixString() + xsdTag.toString() + ender +"\n";
     }
 
 }

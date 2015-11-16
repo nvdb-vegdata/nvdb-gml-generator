@@ -1,5 +1,6 @@
 package XsdParser.XSD.Component.Restriction.Facet;
 
+import XsdParser.XSD.Namespace;
 import XsdParser.XSD.XSDComponentAttribute;
 import XsdParser.XSD.XSDTag;
 
@@ -9,16 +10,18 @@ import java.util.ArrayList;
  * Created by magopl on 28.09.2015.
  */
 public class TotalDigitsFacet extends RestrictionFacet {
-    public TotalDigitsFacet(ArrayList<XSDComponentAttribute> xsdComponentAttributes) {
-        super(xsdComponentAttributes);
+
+
+    public TotalDigitsFacet(ArrayList<XSDComponentAttribute> xsdComponentAttributes, Namespace nameSpace) {
+        super(xsdComponentAttributes, nameSpace);
     }
 
-    public TotalDigitsFacet(XSDComponentAttribute xsdComponentAttribute) {
-        super(xsdComponentAttribute);
+    public TotalDigitsFacet(XSDComponentAttribute xsdComponentAttribute, Namespace nameSpace) {
+        super(xsdComponentAttribute, nameSpace);
     }
 
-    public TotalDigitsFacet(String value) {
-        super(value);
+    public TotalDigitsFacet(Namespace nameSpace) {
+        super(nameSpace);
     }
 
     @Override

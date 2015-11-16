@@ -29,7 +29,7 @@ public class Master {
             try{
                 DataCatalog dc =  DataCatalog.fromJson((InputStream) apiGateway.getDataCatalog());
                 dc.featureTypes()
-                        .filter(featureType -> featureType.getName().contains(""))
+                        .filter(featureType -> featureType.getName().equals("Skred"))
                         .forEach(featureType -> generateXSDFromFeatureType(featureType));
 
             }catch (Exception e){
@@ -49,14 +49,15 @@ public class Master {
         XsdBuilder builder = new XsdBuilder(parser);
         SchemaDefinition schemaDefinition = builder.generateSchemaDefinition(featureType.attributeTypes().toArray());
         schemaDefinition.clean();
-        //System.out.println(schemaDefinition.unLoad());
-        test(featureType);
+        System.out.println(schemaDefinition.unLoad());
+        printToFile(schemaDefinition.unLoad());
+        //test(featureType);
 
     }
 
-    private void printToFile(String schema){
+    private static void printToFile(String schema){
         try {
-            PrintWriter writer = new PrintWriter("Stikkrenne.xsd", "UTF-8");
+            PrintWriter writer = new PrintWriter("Skred.xsd", "UTF-8");
             writer.println(schema);
             writer.close();
         } catch (Exception e) {
@@ -66,27 +67,37 @@ public class Master {
 
     //region Test region
     private static void test(FeatureType featureType){
-        System.out.println("" + featureType.getName() + "");
+        //System.out.println("" + featureType.getName() + "");
         handleAttributeTypes(featureType);
     }
 
     private static void handleAttributeTypes(FeatureType featureType){
         featureType.attributeTypes()
                 .forEach(attributeType -> {
-                    //System.out.println(attributeType.getType());
+                    /*
+                    System.out.println("ID: " + attributeType.getId());
+                    System.out.println("Name: " + attributeType.getName());
+                    System.out.println("Desc: " + attributeType.getDescription());
+                    System.out.println("Type: " + attributeType.getType());
+                    */
                     if(attributeType instanceof IntegerAttributeType || attributeType instanceof RealAttributeType
                             || attributeType instanceof StringAttributeType || attributeType instanceof BoolAttributeType
                             || attributeType instanceof DateAttributeType || attributeType instanceof ShortDateAttributeType
                             || attributeType instanceof TimeAttributeType || attributeType == null
-                            || attributeType instanceof ListAttributeType || attributeType instanceof LocationalAttributeType
-                            || attributeType instanceof AssociationType || attributeType instanceof SpatialAttributeType){
+                            || attributeType instanceof ListAttributeType
+                            || attributeType instanceof AssociationType || attributeType instanceof LocationalAttributeType){
 
-                    }else{
+                    }else if(attributeType instanceof SpatialAttributeType){
+                        SpatialAttributeType sp = (SpatialAttributeType)attributeType;
+                        //System.out.println(sp.getSpatialType());
+                        if(sp.getSpatialType() == SpatialType.POLYGON) {
+                            System.out.println(" - - - " + featureType.getName());
+                            System.out.println("Name: " + attributeType.getName());
+                            System.out.println("Name: " + attributeType.getId());
+                            System.out.println("Desc: " + attributeType.getDescription());
+                            System.out.println("Type: " + attributeType.getType());
+                        }
 
-
-                        System.out.println("Name: " + attributeType.getName());
-                        System.out.println("Desc: " + attributeType.getDescription());
-                        System.out.println("Type: " + attributeType.getType());
 
                     }
 

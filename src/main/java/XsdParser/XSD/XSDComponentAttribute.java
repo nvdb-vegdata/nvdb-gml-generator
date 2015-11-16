@@ -4,7 +4,7 @@ public class XSDComponentAttribute {
     private final XSDTagAttribute xsdTagAttribute;
     private final String value;
 
-    public XSDComponentAttribute(XSDTagAttribute xsdTagAttribute, String value) {
+    public XSDComponentAttribute(XSDTagAttribute xsdTagAttribute, String value ) {
         this.xsdTagAttribute = xsdTagAttribute;
         this.value = value;
     }
@@ -22,4 +22,5 @@ public class XSDComponentAttribute {
     public String toString(){
         return " " + xsdTagAttribute.toString() + "=" + "\"" + value + "\"";
     }
+
 }

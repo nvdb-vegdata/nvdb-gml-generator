@@ -19,18 +19,26 @@ public class Schema extends XSDComponent {
     private Map<String, Namespace> namespaces = new HashMap<>();
 
 
-    public Schema(XSDComponentAttribute xsdComponentAttribute) {
-        super(xsdComponentAttribute);
+    public Schema(Namespace namespace) {
+        super(namespace);
+        namespaces.put(namespace.getName(), namespace);
+        addXSDComponentAttribute(namespace);
+    }
+
+    public Schema(XSDComponentAttribute xsdComponentAttribute, Namespace namespace) {
+        super(xsdComponentAttribute, namespace);
+        namespaces.put(namespace.getName(), namespace);
+        addXSDComponentAttribute(namespace);
     }
 
     public void addNamespace(Namespace namespace){
-        namespaces.put(namespace.getPrefix(), namespace);
+        namespaces.put(namespace.getName(), namespace);
         addXSDComponentAttribute(namespace);
     }
 
 
-    public Optional<Namespace> getNamespace(int prefix){
-        return Optional.of(namespaces.get(prefix));
+    public Optional<Namespace> getNamespaceWithName(String name){
+        return Optional.of(namespaces.get(name));
     }
 
 

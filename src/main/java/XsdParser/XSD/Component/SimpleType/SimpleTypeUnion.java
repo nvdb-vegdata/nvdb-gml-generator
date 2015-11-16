@@ -2,6 +2,7 @@ package XsdParser.XSD.Component.SimpleType;
 
 import XsdParser.XSD.Component.AllowedAttributesContainer;
 import XsdParser.XSD.Component.XSDComponent;
+import XsdParser.XSD.Namespace;
 import XsdParser.XSD.XSDComponentAttribute;
 import XsdParser.XSD.XSDTag;
 
@@ -12,8 +13,8 @@ import java.util.ArrayList;
  */
 class SimpleTypeUnion extends XSDComponent {
 
-    public SimpleTypeUnion(ArrayList<XSDComponentAttribute> XSDComponentAttributes) {
-        super(XSDComponentAttributes);
+    public SimpleTypeUnion(ArrayList<XSDComponentAttribute> XSDComponentAttributes, Namespace namespace) {
+        super(XSDComponentAttributes, namespace);
     }
 
     @Override

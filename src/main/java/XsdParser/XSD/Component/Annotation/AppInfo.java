@@ -2,6 +2,7 @@ package XsdParser.XSD.Component.Annotation;
 
 import XsdParser.XSD.Component.AllowedAttributesContainer;
 import XsdParser.XSD.Component.XSDComponent;
+import XsdParser.XSD.Namespace;
 import XsdParser.XSD.XSDTag;
 import XsdParser.XSD.XSDTagAttribute;
 
@@ -9,7 +10,8 @@ public class AppInfo extends XSDComponent {
     private String value;
 
 
-    public AppInfo(String value) {
+    public AppInfo(String value, Namespace namespace) {
+        super(namespace);
         this.value = value;
     }
 
