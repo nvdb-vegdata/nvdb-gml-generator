@@ -4,6 +4,7 @@ import XsdParser.Parser.ObjectParser;
 import XsdParser.Parser.XsdBuilder;
 import no.svv.nvdb.api.inn.domain.datacatalog.DataCatalog;
 import no.svv.nvdb.api.inn.domain.datacatalog.FeatureType;
+import no.svv.nvdb.api.inn.domain.datacatalog.association.AssociationType;
 import no.svv.nvdb.api.inn.domain.datacatalog.attribute.*;
 import restaccess.NvdbWriteApiGateway;
 
@@ -28,7 +29,7 @@ public class Master {
             try{
                 DataCatalog dc =  DataCatalog.fromJson((InputStream) apiGateway.getDataCatalog());
                 dc.featureTypes()
-                        .filter(featureType -> featureType.getName().contains("Ferist"))
+                        .filter(featureType -> featureType.getName().contains(""))
                         .forEach(featureType -> generateXSDFromFeatureType(featureType));
 
             }catch (Exception e){
@@ -48,8 +49,8 @@ public class Master {
         XsdBuilder builder = new XsdBuilder(parser);
         SchemaDefinition schemaDefinition = builder.generateSchemaDefinition(featureType.attributeTypes().toArray());
         schemaDefinition.clean();
-        System.out.println(schemaDefinition.unLoad());
-        //test(featureType);
+        //System.out.println(schemaDefinition.unLoad());
+        test(featureType);
 
     }
 
@@ -73,23 +74,20 @@ public class Master {
         featureType.attributeTypes()
                 .forEach(attributeType -> {
                     //System.out.println(attributeType.getType());
-                    if(attributeType instanceof IntegerAttributeType || attributeType instanceof RealAttributeType){
+                    if(attributeType instanceof IntegerAttributeType || attributeType instanceof RealAttributeType
+                            || attributeType instanceof StringAttributeType || attributeType instanceof BoolAttributeType
+                            || attributeType instanceof DateAttributeType || attributeType instanceof ShortDateAttributeType
+                            || attributeType instanceof TimeAttributeType || attributeType == null
+                            || attributeType instanceof ListAttributeType || attributeType instanceof LocationalAttributeType
+                            || attributeType instanceof AssociationType || attributeType instanceof SpatialAttributeType){
 
-                    }else if( attributeType instanceof ShortDateAttributeType){
-                        ShortDateAttributeType dateAttributeType = (ShortDateAttributeType)attributeType;
-                        System.out.println(dateAttributeType.getName());
-                        System.out.println(dateAttributeType.getDescription());
-                        System.out.println(dateAttributeType.getFormat());
-
-
-                        /*
-                        if(attributeType instanceof TimeAttributeType){
-                            TimeAttributeType ta = (TimeAttributeType)attributeType;
-                            System.out.println(ta.getFormat());
+                    }else{
 
 
-                        }
-                        */
+                        System.out.println("Name: " + attributeType.getName());
+                        System.out.println("Desc: " + attributeType.getDescription());
+                        System.out.println("Type: " + attributeType.getType());
+
                     }
 
 

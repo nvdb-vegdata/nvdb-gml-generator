@@ -49,8 +49,16 @@ public class ObjXsdParser implements ObjectParser {
             component = createDateAttribute((DateAttributeType)object);
         } else if(object instanceof ShortDateAttributeType){
             component = createShortDateAttribute((ShortDateAttributeType)object);
+        } else if(object instanceof BoolAttributeType) {
+            component = createBooleanAttribute((BoolAttributeType)object);
         }
         return Optional.ofNullable(component);
+    }
+
+    private XSDComponent createBooleanAttribute(BoolAttributeType at){
+        Restriction restriction = new Restriction("boolean");
+        SimpleType simpleType = new SimpleType(restriction);
+        return createElement(at,simpleType);
     }
 
     private XSDComponent createTimeAttribute(TimeAttributeType at){
@@ -59,7 +67,7 @@ public class ObjXsdParser implements ObjectParser {
 
         Optional<String> pattern = getRegexFromTimeFormat(at.getFormat());
         if(!pattern.isPresent()){
-            throw new InvalidParameterException(at.getFormat() + " timeFormat not supported");
+            throw new InvalidParameterException("[" + this.getClass().getSimpleName() + "] " + at.getFormat() + " timeFormat not supported");
         }
         XSDComponent patternFacet = new PatternFacet(pattern.get());
         simpleType.addChildComponent(patternFacet, simpleType);
@@ -110,10 +118,9 @@ public class ObjXsdParser implements ObjectParser {
         return createElement(at, simpleType);
     }
     private XSDComponent createIntegerAttribute(IntegerAttributeType at){
-        Restriction restriction = new Restriction(at.getType().toString().toLowerCase());
+        Restriction restriction = new Restriction("integer");
         XSDComponent maxInclusive = new MaxInclusiveFacet( at.getAbsoluteMaxValue().toString());
         XSDComponent minInclusive = new MinInclusiveFacet(at.getAbsoluteMinValue().toString());
-        XSDComponent maxLength = new MaxLengthFacet(at.getFieldLength().toString());
 
         if(at.getUnit() != null){
             Documentation unitDocumentation = new Documentation("Enhet: " + at.getUnit());
@@ -124,7 +131,6 @@ public class ObjXsdParser implements ObjectParser {
         SimpleType simpleType = new SimpleType(restriction);
         simpleType.addChildComponent(minInclusive,restriction);
         simpleType.addChildComponent(maxInclusive,restriction);
-        simpleType.addChildComponent(maxLength,restriction);
 
         return createElement(at, simpleType);
     }

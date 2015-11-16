@@ -1,6 +1,7 @@
 package XsdParser.Iterator;
 
 import XsdParser.Parser.IteratorListener;
+import no.svv.nvdb.api.inn.domain.datacatalog.attribute.IntegerAttributeType;
 
 import java.util.*;
 
@@ -19,7 +20,7 @@ public class ObjectIterator implements IObjectIterator {
         this.iterator = new RootIterator(name, object);
         this.listener = listener;
     }
-
+    /*
     public boolean iterate() {
 
         if (property != null) {
@@ -41,6 +42,36 @@ public class ObjectIterator implements IObjectIterator {
         }
 
         return false;
+    }*/
+    public boolean iterate() {
+        boolean test;
+        do{
+            if (property != null) {
+                if (!isSingleValued(property) && !visitedProperties.contains(property)) {
+                    visitedProperties.add(property);
+                    IObjectIterator childIterator = createIteratorFor(property);
+                    enterChildProperty(childIterator);
+                    test = true;
+                    continue;
+                }
+            }
+
+            if(iterateCurrentIterator()){
+                test = true;
+                continue;
+            }
+
+            if (hasParentProperty()) {
+                exitToParentProperty();
+                test = true;
+                continue;
+            }
+
+            test =  false;
+        }
+        while(test);
+
+        return test;
     }
     private boolean hasParentProperty(){
         return iteratorStack.size() > 0;
