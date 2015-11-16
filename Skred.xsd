@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns:="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" targetNamespace="myNameSpace">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" targetNamespace="myNameSpace">
 	<element name="skredDato">
 		<annotation>
 			<documentation>
@@ -44,6 +44,22 @@
 		</annotation>
 		<simpleType>
 			<restriction base="string">
+				<enumeration value="Stein">
+				</enumeration>
+				<enumeration value="Jord/løsmasse">
+				</enumeration>
+				<enumeration value="Is/stein">
+				</enumeration>
+				<enumeration value="Snø">
+				</enumeration>
+				<enumeration value="Is">
+				</enumeration>
+				<enumeration value="Flomskred (vann+stein+jord)">
+				</enumeration>
+				<enumeration value="Sørpeskred (vann+snø+stein)">
+				</enumeration>
+				<enumeration value="Utglidning av veg">
+				</enumeration>
 			</restriction>
 		</simpleType>
 	</element>
@@ -58,6 +74,18 @@
 		</annotation>
 		<simpleType>
 			<restriction base="string">
+				<enumeration value="10 kbm">
+				</enumeration>
+				<enumeration value="100 kbm">
+				</enumeration>
+				<enumeration value="1000 kbm">
+				</enumeration>
+				<enumeration value="1000 kbm">
+				</enumeration>
+				<enumeration value="Ikke vurdert">
+				</enumeration>
+				<enumeration value="1 kbm">
+				</enumeration>
 			</restriction>
 		</simpleType>
 	</element>
@@ -72,6 +100,18 @@
 		</annotation>
 		<simpleType>
 			<restriction base="string">
+				<enumeration value="Vegbane/-fylling">
+				</enumeration>
+				<enumeration value="Tunnelmunning">
+				</enumeration>
+				<enumeration value="Vegskjæring">
+				</enumeration>
+				<enumeration value="Ur">
+				</enumeration>
+				<enumeration value="Fjell/dalside">
+				</enumeration>
+				<enumeration value="Inne i tunnel">
+				</enumeration>
 			</restriction>
 		</simpleType>
 	</element>
@@ -109,6 +149,16 @@
 		</annotation>
 		<simpleType>
 			<restriction base="string">
+				<enumeration value="> 200 m">
+				</enumeration>
+				<enumeration value="Ikke vurdert">
+				</enumeration>
+				<enumeration value="Nedenfor veg">
+				</enumeration>
+				<enumeration value="0 - 50 m">
+				</enumeration>
+				<enumeration value="50 - 200 m">
+				</enumeration>
 			</restriction>
 		</simpleType>
 	</element>
@@ -123,6 +173,10 @@
 		</annotation>
 		<simpleType>
 			<restriction base="string">
+				<enumeration value="Ja">
+				</enumeration>
+				<enumeration value="Nei">
+				</enumeration>
 			</restriction>
 		</simpleType>
 	</element>
@@ -137,6 +191,10 @@
 		</annotation>
 		<simpleType>
 			<restriction base="string">
+				<enumeration value="Ja">
+				</enumeration>
+				<enumeration value="Nei">
+				</enumeration>
 			</restriction>
 		</simpleType>
 	</element>
@@ -151,6 +209,10 @@
 		</annotation>
 		<simpleType>
 			<restriction base="string">
+				<enumeration value="Ja">
+				</enumeration>
+				<enumeration value="Nei">
+				</enumeration>
 			</restriction>
 		</simpleType>
 	</element>
@@ -165,6 +227,10 @@
 		</annotation>
 		<simpleType>
 			<restriction base="string">
+				<enumeration value="Ja">
+				</enumeration>
+				<enumeration value="Nei">
+				</enumeration>
 			</restriction>
 		</simpleType>
 	</element>
@@ -179,6 +245,10 @@
 		</annotation>
 		<simpleType>
 			<restriction base="string">
+				<enumeration value="Ja">
+				</enumeration>
+				<enumeration value="Nei">
+				</enumeration>
 			</restriction>
 		</simpleType>
 	</element>
@@ -193,6 +263,10 @@
 		</annotation>
 		<simpleType>
 			<restriction base="string">
+				<enumeration value="Ja">
+				</enumeration>
+				<enumeration value="Nei">
+				</enumeration>
 			</restriction>
 		</simpleType>
 	</element>
@@ -246,6 +320,10 @@
 		</annotation>
 		<simpleType>
 			<restriction base="string">
+				<enumeration value="Ja">
+				</enumeration>
+				<enumeration value="Nei">
+				</enumeration>
 			</restriction>
 		</simpleType>
 	</element>
@@ -260,6 +338,24 @@
 		</annotation>
 		<simpleType>
 			<restriction base="string">
+				<enumeration value="Ingen nedbør">
+				</enumeration>
+				<enumeration value="Regn">
+				</enumeration>
+				<enumeration value="Regn, lite">
+				</enumeration>
+				<enumeration value="Regn, middels">
+				</enumeration>
+				<enumeration value="Regn, mye">
+				</enumeration>
+				<enumeration value="Snø">
+				</enumeration>
+				<enumeration value="Snø, lite">
+				</enumeration>
+				<enumeration value="Snø, middels">
+				</enumeration>
+				<enumeration value="Snø, mye">
+				</enumeration>
 			</restriction>
 		</simpleType>
 	</element>
@@ -274,6 +370,40 @@
 		</annotation>
 		<simpleType>
 			<restriction base="string">
+				<enumeration value="SSV">
+				</enumeration>
+				<enumeration value="SV">
+				</enumeration>
+				<enumeration value="VSV">
+				</enumeration>
+				<enumeration value="V">
+				</enumeration>
+				<enumeration value="VNV">
+				</enumeration>
+				<enumeration value="NV">
+				</enumeration>
+				<enumeration value="NNV">
+				</enumeration>
+				<enumeration value="N">
+				</enumeration>
+				<enumeration value="NNØ">
+				</enumeration>
+				<enumeration value="ØNØ">
+				</enumeration>
+				<enumeration value="Ø">
+				</enumeration>
+				<enumeration value="ØSØ">
+				</enumeration>
+				<enumeration value="SØ">
+				</enumeration>
+				<enumeration value="SSØ">
+				</enumeration>
+				<enumeration value="NØ">
+				</enumeration>
+				<enumeration value="Vindstille">
+				</enumeration>
+				<enumeration value="S">
+				</enumeration>
 			</restriction>
 		</simpleType>
 	</element>
@@ -288,6 +418,16 @@
 		</annotation>
 		<simpleType>
 			<restriction base="string">
+				<enumeration value="10 m">
+				</enumeration>
+				<enumeration value="10 - 50 m">
+				</enumeration>
+				<enumeration value="50 - 100 m">
+				</enumeration>
+				<enumeration value="100 m">
+				</enumeration>
+				<enumeration value="Kun i grøft">
+				</enumeration>
 			</restriction>
 		</simpleType>
 	</element>
@@ -316,6 +456,10 @@
 		</annotation>
 		<simpleType>
 			<restriction base="string">
+				<enumeration value="Ja">
+				</enumeration>
+				<enumeration value="Nei">
+				</enumeration>
 			</restriction>
 		</simpleType>
 	</element>
@@ -355,6 +499,16 @@
 		</annotation>
 		<simpleType>
 			<restriction base="string">
+				<enumeration value="Ingen stengning">
+				</enumeration>
+				<enumeration value="Stengning av del av vegbane">
+				</enumeration>
+				<enumeration value="Stengt for tungtrafikk">
+				</enumeration>
+				<enumeration value="Stengt for personbiler">
+				</enumeration>
+				<enumeration value="Stengt for all trafikk">
+				</enumeration>
 			</restriction>
 		</simpleType>
 	</element>
@@ -369,6 +523,10 @@
 		</annotation>
 		<simpleType>
 			<restriction base="string">
+				<enumeration value="Ja">
+				</enumeration>
+				<enumeration value="Nei">
+				</enumeration>
 			</restriction>
 		</simpleType>
 	</element>
