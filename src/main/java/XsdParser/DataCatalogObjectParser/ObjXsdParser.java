@@ -18,15 +18,19 @@ import no.svv.nvdb.api.inn.domain.datacatalog.attribute.*;
 import no.svv.nvdb.api.inn.domain.datacatalog.constraint.EnumStringAttribute;
 
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class ObjXsdParser implements ObjectParser {
     private Schema schema;
+    private Namespace globalNamespace;
 
     @Override
     public Schema createSchemaTag() {
-        Schema schema = new Schema(new XSDComponentAttribute(XSDTagAttribute.XMLNS,"http://www.w3.org/2001/XMLSchema"));
-        schema.addNamespace(new Namespace(XSDTagAttribute.XMLNS,"http://www.opengis.net/gml/3.2", "gml"));
+        globalNamespace = new Namespace(XSDTagAttribute.XMLNS, "http://www.w3.org/2001/XMLSchema","xsd", "xs");
+        Schema schema = new Schema(globalNamespace);
+        schema.addNamespace(new Namespace(XSDTagAttribute.XMLNS, "http://www.opengis.net/gml/3.2", "gml", "gml"));
+        schema.addXSDComponentAttribute(new XSDComponentAttribute(XSDTagAttribute.TARGETNAMESPACE, "myNameSpace"));
         this.schema = schema;
         return schema;
     }
@@ -51,54 +55,90 @@ public class ObjXsdParser implements ObjectParser {
             component = createShortDateAttribute((ShortDateAttributeType)object);
         } else if(object instanceof BoolAttributeType) {
             component = createBooleanAttribute((BoolAttributeType)object);
-        }
+        } /*else if(object instanceof SpatialAttributeType){
+            component = createSpatialAttribute((SpatialAttributeType)object);
+        }*/
         return Optional.ofNullable(component);
     }
 
+    private XSDComponent createSpatialAttribute(SpatialAttributeType at){
+
+        ArrayList<XSDComponentAttribute> componentAttributes = new ArrayList<>();
+        String elementName = XSDStringFormatter.createElementName(at.getName());
+
+        XSDComponentAttribute nameAttribute = new XSDComponentAttribute(XSDTagAttribute.NAME,elementName);
+        Optional<String> typeValue = getGmlTypeFromSpatial(at.getSpatialType());
+        componentAttributes.add(nameAttribute);
+        if(typeValue.isPresent()){
+            String typeWithPrefix = schema.getNamespaceWithName("gml").get().getTypeNameWithPrefix(typeValue.get());
+            XSDComponentAttribute typeAttribute = new XSDComponentAttribute(XSDTagAttribute.TYPE, typeWithPrefix);
+            componentAttributes.add(typeAttribute);
+        }
+        return createElement(at, componentAttributes);
+    }
+
+    private Optional<String> getGmlTypeFromSpatial(SpatialType type){
+        String res = null;
+        switch (type){
+            case POINT:
+                res = "PointPropertyType";
+                break;
+            case POLYGON:
+                res = "SurfacePropertyType";
+                break;
+            case LINE:
+                res = "CurvePropertyType";
+                break;
+
+        }
+        return Optional.ofNullable(res);
+
+    }
+
     private XSDComponent createBooleanAttribute(BoolAttributeType at){
-        Restriction restriction = new Restriction("boolean");
-        SimpleType simpleType = new SimpleType(restriction);
+        Restriction restriction = new Restriction("boolean", globalNamespace);
+        SimpleType simpleType = new SimpleType(restriction, globalNamespace);
         return createElement(at,simpleType);
     }
 
     private XSDComponent createTimeAttribute(TimeAttributeType at){
-        Restriction restriction = new Restriction("string");
-        SimpleType simpleType = new SimpleType(restriction);
+        Restriction restriction = new Restriction("string", globalNamespace);
+        SimpleType simpleType = new SimpleType(restriction, globalNamespace);
 
         Optional<String> pattern = getRegexFromTimeFormat(at.getFormat());
         if(!pattern.isPresent()){
             throw new InvalidParameterException("[" + this.getClass().getSimpleName() + "] " + at.getFormat() + " timeFormat not supported");
         }
-        XSDComponent patternFacet = new PatternFacet(pattern.get());
+        XSDComponent patternFacet = new PatternFacet(pattern.get(), globalNamespace);
         simpleType.addChildComponent(patternFacet, simpleType);
 
         return createElement(at, simpleType);
     }
 
     private XSDComponent createDateAttribute(DateAttributeType at){
-        Restriction restriction = new Restriction("string");
-        SimpleType simpleType = new SimpleType(restriction);
+        Restriction restriction = new Restriction("string", globalNamespace);
+        SimpleType simpleType = new SimpleType(restriction, globalNamespace);
 
         Optional<String> regexPattern = getRegexFromDateFormat(at.getFormat());
         if(!regexPattern.isPresent()){
             throw new InvalidParameterException(at.getFormat() + " dateFormat not supported");
         }
 
-        XSDComponent patternFacet = new PatternFacet(regexPattern.get());
+        XSDComponent patternFacet = new PatternFacet(regexPattern.get(), globalNamespace);
         simpleType.addChildComponent(patternFacet, simpleType);
         return createElement(at, simpleType);
     }
 
     private XSDComponent createShortDateAttribute(ShortDateAttributeType at){
-        Restriction restriction = new Restriction("string");
-        SimpleType simpleType = new SimpleType(restriction);
+        Restriction restriction = new Restriction("string", globalNamespace);
+        SimpleType simpleType = new SimpleType(restriction, globalNamespace);
 
         Optional<String> regexPattern = getRegexFromDateFormat(at.getFormat());
         if(!regexPattern.isPresent()){
             throw new InvalidParameterException(at.getFormat() + " dateFormat not supported");
         }
 
-        XSDComponent patternFacet = new PatternFacet(regexPattern.get());
+        XSDComponent patternFacet = new PatternFacet(regexPattern.get(), globalNamespace);
         simpleType.addChildComponent(patternFacet, simpleType);
 
         return createElement(at, simpleType);
@@ -109,26 +149,26 @@ public class ObjXsdParser implements ObjectParser {
 
 
     private XSDComponent createEnumStringAttribute(EnumStringAttribute enumAttribute){
-        return new EnumerationFacet(new XSDComponentAttribute(XSDTagAttribute.VALUE, enumAttribute.getValue()));
+        return new EnumerationFacet(new XSDComponentAttribute(XSDTagAttribute.VALUE, enumAttribute.getValue()), globalNamespace);
     }
 
     private XSDComponent createStringAttribute(StringAttributeType at){
-        Restriction restriction = new Restriction(at.getType().toString().toLowerCase());
-        SimpleType simpleType = new SimpleType(restriction);
+        Restriction restriction = new Restriction(at.getType().toString().toLowerCase(), globalNamespace);
+        SimpleType simpleType = new SimpleType(restriction, globalNamespace);
         return createElement(at, simpleType);
     }
     private XSDComponent createIntegerAttribute(IntegerAttributeType at){
-        Restriction restriction = new Restriction("integer");
-        XSDComponent maxInclusive = new MaxInclusiveFacet( at.getAbsoluteMaxValue().toString());
-        XSDComponent minInclusive = new MinInclusiveFacet(at.getAbsoluteMinValue().toString());
+        Restriction restriction = new Restriction("integer", globalNamespace);
+        XSDComponent maxInclusive = new MaxInclusiveFacet( at.getAbsoluteMaxValue().toString(), globalNamespace);
+        XSDComponent minInclusive = new MinInclusiveFacet(at.getAbsoluteMinValue().toString(), globalNamespace);
 
         if(at.getUnit() != null){
-            Documentation unitDocumentation = new Documentation("Enhet: " + at.getUnit());
-            Annotation annotation = new Annotation();
+            Documentation unitDocumentation = new Documentation("Enhet: " + at.getUnit(), globalNamespace);
+            Annotation annotation = new Annotation(globalNamespace);
             annotation.addChildComponent(unitDocumentation, annotation);
             restriction.addChildComponent(annotation,restriction);
         }
-        SimpleType simpleType = new SimpleType(restriction);
+        SimpleType simpleType = new SimpleType(restriction, globalNamespace);
         simpleType.addChildComponent(minInclusive,restriction);
         simpleType.addChildComponent(maxInclusive,restriction);
 
@@ -136,50 +176,54 @@ public class ObjXsdParser implements ObjectParser {
     }
 
     private XSDComponent createRealAttribute(RealAttributeType at){
-        Restriction restriction = new Restriction("decimal");
+        Restriction restriction = new Restriction("decimal", globalNamespace);
+        SimpleType simpleType = new SimpleType(restriction, globalNamespace);
+        if(at.getUnit() != null ){
+            Documentation unitDocumentation = new Documentation("Enhet: " + at.getUnit(),globalNamespace);
+            Annotation annotation = new Annotation(globalNamespace);
+            annotation.addChildComponent(unitDocumentation,annotation);
+            simpleType.addChildComponent(annotation,simpleType);
+        }
 
         if( at.getAbsoluteMaxValue() != null && at.getAbsoluteMinValue() != null){
-            XSDComponent maxInclusive = new MaxInclusiveFacet(at.getAbsoluteMaxValue().toString());
-            XSDComponent minInclusive = new MinInclusiveFacet(at.getAbsoluteMinValue().toString());
+            XSDComponent maxInclusive = new MaxInclusiveFacet(at.getAbsoluteMaxValue().toString(),globalNamespace);
+            XSDComponent minInclusive = new MinInclusiveFacet(at.getAbsoluteMinValue().toString(), globalNamespace);
             restriction.addChildComponent(minInclusive,restriction);
             restriction.addChildComponent(maxInclusive,restriction);
         }
 
         if(at.getNumDecimals() != null){
-            XSDComponent fractionDigits = new FractionDigitsFacet(at.getNumDecimals().toString());
+            XSDComponent fractionDigits = new FractionDigitsFacet(at.getNumDecimals().toString(),globalNamespace);
             restriction.addChildComponent(fractionDigits,restriction);
         }
-
-
-        if(at.getUnit() != null ){
-            Documentation unitDocumentation = new Documentation("Enhet: " + at.getUnit());
-            Annotation annotation = new Annotation();
-            annotation.addChildComponent(unitDocumentation,annotation);
-            restriction.addChildComponent(annotation,restriction);
-        }
-
-        SimpleType simpleType = new SimpleType(restriction);
-
-
         return createElement(at, simpleType);
     }
 
     private Annotation createGeneralAnnotation(AttributeType at) {
-        Annotation annotation = new Annotation();
-        Documentation documentation = new Documentation(at.getDescription());
+        Annotation annotation = new Annotation(globalNamespace);
+        Documentation documentation = new Documentation(at.getDescription(),globalNamespace);
         annotation.addChildComponent(documentation,annotation);
-        AppInfo appinfo = new AppInfo(at.getSosiName() + " : " + at.getId());
+        AppInfo appinfo = new AppInfo(at.getSosiName() + " : " + at.getId(), globalNamespace);
         annotation.addChildComponent(appinfo, annotation);
         return  annotation;
 
     }
 
+    private Element createElement(AttributeType at, ArrayList<XSDComponentAttribute> attributes){
+        Annotation annotation = createGeneralAnnotation(at);
+        Element element = new Element(attributes, globalNamespace);
+        element.addChildComponent(annotation, element);
+        if(isDeprecated(at.getName())){
+            element.setDeprecated(true);
+        }
+        return element;
+    }
 
     private Element createElement(AttributeType at, XSDComponent component){
         Annotation annotation = createGeneralAnnotation(at);
         String elementName = XSDStringFormatter.createElementName(at.getName());
         XSDComponentAttribute nameAttribute = new XSDComponentAttribute(XSDTagAttribute.NAME,elementName);
-        Element element = new Element(nameAttribute, component);
+        Element element = new Element(nameAttribute, component, globalNamespace);
         element.addChildComponent(annotation, element);
         if(isDeprecated(at.getName())){
             element.setDeprecated(true);

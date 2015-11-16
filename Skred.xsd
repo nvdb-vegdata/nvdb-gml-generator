@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" targetNamespace="myNameSpace">
+	<xs:element name="skredDato">
+		<xs:annotation>
+			<xs:documentation>
+				Angir dato da skredet gikk
+			</xs:documentation>
+			<xs:appinfo>
+				SkredDato_2324 : 2324
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="string">
+				<xs:pattern value="^[0-9]{4}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$">
+				</xs:pattern>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="skredKlokkeslett">
+		<xs:annotation>
+			<xs:documentation>
+				Angir klokkeslett da skredet gikk
+			</xs:documentation>
+			<xs:appinfo>
+				SkredKlokkeslett_2325 : 2325
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="integer">
+				<xs:minInclusive value="-2147483648">
+				</xs:minInclusive>
+				<xs:maxInclusive value="2147483647">
+				</xs:maxInclusive>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="typeSkred">
+		<xs:annotation>
+			<xs:documentation>
+				Angir hvilken type skred det er tale om
+			</xs:documentation>
+			<xs:appinfo>
+				TypeSkred_2326 : 2326
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="string">
+				<xs:enumeration value="Stein">
+				</xs:enumeration>
+				<xs:enumeration value="Jord/løsmasse">
+				</xs:enumeration>
+				<xs:enumeration value="Is/stein">
+				</xs:enumeration>
+				<xs:enumeration value="Snø">
+				</xs:enumeration>
+				<xs:enumeration value="Is">
+				</xs:enumeration>
+				<xs:enumeration value="Flomskred (vann+stein+jord)">
+				</xs:enumeration>
+				<xs:enumeration value="Sørpeskred (vann+snø+stein)">
+				</xs:enumeration>
+				<xs:enumeration value="Utglidning av veg">
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="volumAvSkredmasserPåVeg">
+		<xs:annotation>
+			<xs:documentation>
+				Angir volum av skredmasser på vegen
+			</xs:documentation>
+			<xs:appinfo>
+				VolumAvSkredmasserPåV_2327 : 2327
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="string">
+				<xs:enumeration value="<10 kbm">
+				</xs:enumeration>
+				<xs:enumeration value="< 100 kbm">
+				</xs:enumeration>
+				<xs:enumeration value="< 1000 kbm">
+				</xs:enumeration>
+				<xs:enumeration value="> 1000 kbm">
+				</xs:enumeration>
+				<xs:enumeration value="Ikke vurdert">
+				</xs:enumeration>
+				<xs:enumeration value="< 1 kbm">
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="løsneområde">
+		<xs:annotation>
+			<xs:documentation>
+				Angir løsneområde for skredet
+			</xs:documentation>
+			<xs:appinfo>
+				Løsneområde_2328 : 2328
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="string">
+				<xs:enumeration value="Vegbane/-fylling">
+				</xs:enumeration>
+				<xs:enumeration value="Tunnelmunning">
+				</xs:enumeration>
+				<xs:enumeration value="Vegskjæring">
+				</xs:enumeration>
+				<xs:enumeration value="Ur">
+				</xs:enumeration>
+				<xs:enumeration value="Fjell/dalside">
+				</xs:enumeration>
+				<xs:enumeration value="Inne i tunnel">
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="volumAvTotaleSkredmasser">
+		<xs:annotation>
+			<xs:documentation>
+				Anslag over hvor stort det totale skredet har vært
+			</xs:documentation>
+			<xs:appinfo>
+				VolumAvTotaleSkredmas_2329 : 2329
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="integer">
+				<xs:annotation>
+					<xs:documentation>
+						Enhet: Kubikkmeter (11)
+					</xs:documentation>
+				</xs:annotation>
+				<xs:minInclusive value="0">
+				</xs:minInclusive>
+				<xs:maxInclusive value="2147483647">
+				</xs:maxInclusive>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="høydeforskjellVegUtløsningssted">
+		<xs:annotation>
+			<xs:documentation>
+				Angir høydeforskjell mellom skredets utløsningssted og vegen
+			</xs:documentation>
+			<xs:appinfo>
+				HøydeforskjellVegUtlø_2330 : 2330
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="string">
+				<xs:enumeration value="> 200 m">
+				</xs:enumeration>
+				<xs:enumeration value="Ikke vurdert">
+				</xs:enumeration>
+				<xs:enumeration value="Nedenfor veg">
+				</xs:enumeration>
+				<xs:enumeration value="0 - 50 m">
+				</xs:enumeration>
+				<xs:enumeration value="50 - 200 m">
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="vesentligeSkader">
+		<xs:annotation>
+			<xs:documentation>
+				Angir om skredet totalt sett har gitt vesentlige skader eller ikke.
+			</xs:documentation>
+			<xs:appinfo>
+				VesentligeSkader_2331 : 2331
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="string">
+				<xs:enumeration value="Ja">
+				</xs:enumeration>
+				<xs:enumeration value="Nei">
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="skadePåPerson">
+		<xs:annotation>
+			<xs:documentation>
+				Angir om skredet har medført skade på person
+			</xs:documentation>
+			<xs:appinfo>
+				SkadePåPerson_2332 : 2332
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="string">
+				<xs:enumeration value="Ja">
+				</xs:enumeration>
+				<xs:enumeration value="Nei">
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="skadePåKjøretøy">
+		<xs:annotation>
+			<xs:documentation>
+				Angir om skredet har medført skade på kjøretøy
+			</xs:documentation>
+			<xs:appinfo>
+				SkadePåKjøretøy_2333 : 2333
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="string">
+				<xs:enumeration value="Ja">
+				</xs:enumeration>
+				<xs:enumeration value="Nei">
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="skadePåVegdekkeVegkropp">
+		<xs:annotation>
+			<xs:documentation>
+				Angir om skredet har medført skade på vegdekke og/eller vegkropp
+			</xs:documentation>
+			<xs:appinfo>
+				SkadePåVegdekkeVegkro_2334 : 2334
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="string">
+				<xs:enumeration value="Ja">
+				</xs:enumeration>
+				<xs:enumeration value="Nei">
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="skadePåBru">
+		<xs:annotation>
+			<xs:documentation>
+				Angir om skredet har medført skade på bru
+			</xs:documentation>
+			<xs:appinfo>
+				SkadePåBru_2335 : 2335
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="string">
+				<xs:enumeration value="Ja">
+				</xs:enumeration>
+				<xs:enumeration value="Nei">
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="skadePåRekkverk">
+		<xs:annotation>
+			<xs:documentation>
+				Angir om skredet har medført skade på rekkverk
+			</xs:documentation>
+			<xs:appinfo>
+				SkadePåRekkverk_2336 : 2336
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="string">
+				<xs:enumeration value="Ja">
+				</xs:enumeration>
+				<xs:enumeration value="Nei">
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="temperaturPåVeg">
+		<xs:annotation>
+			<xs:documentation>
+				Angir lufttemperatur på/ved vegen der skredet har inntruffet.
+			</xs:documentation>
+			<xs:appinfo>
+				TemperaturPåVeg_5153 : 5153
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:annotation>
+				<xs:documentation>
+					Enhet: Grader Celcius (9)
+				</xs:documentation>
+			</xs:annotation>
+			<xs:restriction base="decimal">
+				<xs:minInclusive value="-999.9">
+				</xs:minInclusive>
+				<xs:maxInclusive value="999.9">
+				</xs:maxInclusive>
+				<xs:fractionDigits value="1">
+				</xs:fractionDigits>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="stedsangivelse">
+		<xs:annotation>
+			<xs:documentation>
+				Stedsnavn hvor forekomst er lokalisert.  Evt plassering i forhold til stedsnavn.
+			</xs:documentation>
+			<xs:appinfo>
+				Stedsangivelse_7905 : 7905
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="string">
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="skadePåDrenering">
+		<xs:annotation>
+			<xs:documentation>
+				Angir om skredet har medført skade på drenering
+			</xs:documentation>
+			<xs:appinfo>
+				SkadePåDrenering_2338 : 2338
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="string">
+				<xs:enumeration value="Ja">
+				</xs:enumeration>
+				<xs:enumeration value="Nei">
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="værforholdPåVegen">
+		<xs:annotation>
+			<xs:documentation>
+				Angir hvilke værforhold det var på vegen da skredet gikk
+			</xs:documentation>
+			<xs:appinfo>
+				VærforholdPåVegen_2339 : 2339
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="string">
+				<xs:enumeration value="Ingen nedbør">
+				</xs:enumeration>
+				<xs:enumeration value="Regn">
+				</xs:enumeration>
+				<xs:enumeration value="Regn, lite">
+				</xs:enumeration>
+				<xs:enumeration value="Regn, middels">
+				</xs:enumeration>
+				<xs:enumeration value="Regn, mye">
+				</xs:enumeration>
+				<xs:enumeration value="Snø">
+				</xs:enumeration>
+				<xs:enumeration value="Snø, lite">
+				</xs:enumeration>
+				<xs:enumeration value="Snø, middels">
+				</xs:enumeration>
+				<xs:enumeration value="Snø, mye">
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="vindretning">
+		<xs:annotation>
+			<xs:documentation>
+				Angir hvilken vindretning det var på vegen da skredet gikk
+			</xs:documentation>
+			<xs:appinfo>
+				Vindretning_2340 : 2340
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="string">
+				<xs:enumeration value="SSV">
+				</xs:enumeration>
+				<xs:enumeration value="SV">
+				</xs:enumeration>
+				<xs:enumeration value="VSV">
+				</xs:enumeration>
+				<xs:enumeration value="V">
+				</xs:enumeration>
+				<xs:enumeration value="VNV">
+				</xs:enumeration>
+				<xs:enumeration value="NV">
+				</xs:enumeration>
+				<xs:enumeration value="NNV">
+				</xs:enumeration>
+				<xs:enumeration value="N">
+				</xs:enumeration>
+				<xs:enumeration value="NNØ">
+				</xs:enumeration>
+				<xs:enumeration value="ØNØ">
+				</xs:enumeration>
+				<xs:enumeration value="Ø">
+				</xs:enumeration>
+				<xs:enumeration value="ØSØ">
+				</xs:enumeration>
+				<xs:enumeration value="SØ">
+				</xs:enumeration>
+				<xs:enumeration value="SSØ">
+				</xs:enumeration>
+				<xs:enumeration value="NØ">
+				</xs:enumeration>
+				<xs:enumeration value="Vindstille">
+				</xs:enumeration>
+				<xs:enumeration value="S">
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="blokkertVeglengde">
+		<xs:annotation>
+			<xs:documentation>
+				Angir lengde av veg som var blokkert av skredet
+			</xs:documentation>
+			<xs:appinfo>
+				BlokkertVeglengde_2341 : 2341
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="string">
+				<xs:enumeration value="< 10 m">
+				</xs:enumeration>
+				<xs:enumeration value="10 - 50 m">
+				</xs:enumeration>
+				<xs:enumeration value="50 - 100 m">
+				</xs:enumeration>
+				<xs:enumeration value="> 100 m">
+				</xs:enumeration>
+				<xs:enumeration value="Kun i grøft">
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="registreringsansvarlig">
+		<xs:annotation>
+			<xs:documentation>
+				Angir hvem som er ansvarlig for registrert informasjon om skredet
+			</xs:documentation>
+			<xs:appinfo>
+				Registreringsansvarli_7845 : 7845
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="string">
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="blokkertGangSykkelveg">
+		<xs:annotation>
+			<xs:documentation>
+				Angir om gang/sykkelveg er blitt blokkert av skredet
+			</xs:documentation>
+			<xs:appinfo>
+				BlokkertGangSykkelveg_2342 : 2342
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="string">
+				<xs:enumeration value="Ja">
+				</xs:enumeration>
+				<xs:enumeration value="Nei">
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="grøftebreddePåSkredside">
+		<xs:annotation>
+			<xs:documentation>
+				Angir grøftebredde på skredside
+			</xs:documentation>
+			<xs:appinfo>
+				GrøftebreddePåSkredsi_2343 : 2343
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:annotation>
+				<xs:documentation>
+					Enhet: Meter (1)
+				</xs:documentation>
+			</xs:annotation>
+			<xs:restriction base="decimal">
+				<xs:minInclusive value="0.0">
+				</xs:minInclusive>
+				<xs:maxInclusive value="99.9">
+				</xs:maxInclusive>
+				<xs:fractionDigits value="1">
+				</xs:fractionDigits>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="stengning">
+		<xs:annotation>
+			<xs:documentation>
+				Gir informasjon om eventuell stengning av vegen
+			</xs:documentation>
+			<xs:appinfo>
+				Stengning_2344 : 2344
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="string">
+				<xs:enumeration value="Ingen stengning">
+				</xs:enumeration>
+				<xs:enumeration value="Stengning av del av vegbane">
+				</xs:enumeration>
+				<xs:enumeration value="Stengt for tungtrafikk">
+				</xs:enumeration>
+				<xs:enumeration value="Stengt for personbiler">
+				</xs:enumeration>
+				<xs:enumeration value="Stengt for all trafikk">
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="bilder">
+		<xs:annotation>
+			<xs:documentation>
+				Angir om det finnes bilder av skredet eller ikke.
+			</xs:documentation>
+			<xs:appinfo>
+				Bilder_2355 : 2355
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="string">
+				<xs:enumeration value="Ja">
+				</xs:enumeration>
+				<xs:enumeration value="Nei">
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+</xs:schema>
+

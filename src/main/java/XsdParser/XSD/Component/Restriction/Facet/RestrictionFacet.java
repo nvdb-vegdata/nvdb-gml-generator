@@ -2,6 +2,7 @@ package XsdParser.XSD.Component.Restriction.Facet;
 
 import XsdParser.XSD.Component.AllowedAttributesContainer;
 import XsdParser.XSD.Component.XSDComponent;
+import XsdParser.XSD.Namespace;
 import XsdParser.XSD.XSDComponentAttribute;
 import XsdParser.XSD.XSDTag;
 import XsdParser.XSD.XSDTagAttribute;
@@ -12,16 +13,20 @@ import java.util.ArrayList;
  * Created by magopl on 28.09.2015.
  */
 public class RestrictionFacet extends XSDComponent {
-    public RestrictionFacet(ArrayList<XSDComponentAttribute> xsdComponentAttributes) {
-        super(xsdComponentAttributes);
+    public RestrictionFacet(ArrayList<XSDComponentAttribute> xsdComponentAttributes, Namespace nameSpace) {
+        super(xsdComponentAttributes, nameSpace);
     }
 
-    public RestrictionFacet(XSDComponentAttribute xsdComponentAttribute) {
-        super(xsdComponentAttribute);
+    public RestrictionFacet(XSDComponentAttribute xsdComponentAttribute, Namespace nameSpace) {
+        super(xsdComponentAttribute, nameSpace);
     }
 
-    public RestrictionFacet(String value) {
-        super(new XSDComponentAttribute(XSDTagAttribute.VALUE, value));
+    public RestrictionFacet(Namespace nameSpace) {
+        super(nameSpace);
+    }
+
+    public RestrictionFacet(String value, Namespace namespace) {
+        super(new XSDComponentAttribute(XSDTagAttribute.VALUE, value), namespace);
     }
 
     @Override

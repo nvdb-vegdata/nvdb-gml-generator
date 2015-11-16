@@ -1,8 +1,11 @@
 package XsdParser.XSD.Component;
 
+import XsdParser.XSD.Namespace;
 import XsdParser.XSD.XSDComponentAttribute;
 import XsdParser.XSD.XSDTag;
+import com.sun.org.apache.xml.internal.utils.NameSpace;
 
+import javax.lang.model.element.Name;
 import java.util.ArrayList;
 
 /**
@@ -10,12 +13,12 @@ import java.util.ArrayList;
  */
 public class ComplexType extends XSDComponent {
 
-    public ComplexType(ArrayList<XSDComponentAttribute> xsdComponentAttributes) {
-        super(xsdComponentAttributes);
+    public ComplexType(ArrayList<XSDComponentAttribute> xsdComponentAttributes, Namespace nameSpace) {
+        super(xsdComponentAttributes, nameSpace);
     }
 
-    public ComplexType(XSDComponentAttribute xsdComponentAttribute) {
-        super(xsdComponentAttribute);
+    public ComplexType(XSDComponentAttribute xsdComponentAttribute, Namespace nameSpace) {
+        super(xsdComponentAttribute, nameSpace);
     }
 
     @Override

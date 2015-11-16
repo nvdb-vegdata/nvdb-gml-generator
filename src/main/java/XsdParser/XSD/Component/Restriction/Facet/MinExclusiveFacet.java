@@ -1,5 +1,6 @@
 package XsdParser.XSD.Component.Restriction.Facet;
 
+import XsdParser.XSD.Namespace;
 import XsdParser.XSD.XSDComponentAttribute;
 import XsdParser.XSD.XSDTag;
 
@@ -10,16 +11,16 @@ import java.util.ArrayList;
  */
 public class MinExclusiveFacet extends RestrictionFacet {
 
-    public MinExclusiveFacet(ArrayList<XSDComponentAttribute> xsdComponentAttributes) {
-        super(xsdComponentAttributes);
+    public MinExclusiveFacet(ArrayList<XSDComponentAttribute> xsdComponentAttributes, Namespace nameSpace) {
+        super(xsdComponentAttributes, nameSpace);
     }
 
-    public MinExclusiveFacet(XSDComponentAttribute xsdComponentAttribute) {
-        super(xsdComponentAttribute);
+    public MinExclusiveFacet(XSDComponentAttribute xsdComponentAttribute, Namespace nameSpace) {
+        super(xsdComponentAttribute, nameSpace);
     }
 
-    public MinExclusiveFacet(String value) {
-        super(value);
+    public MinExclusiveFacet(Namespace nameSpace) {
+        super(nameSpace);
     }
 
     @Override

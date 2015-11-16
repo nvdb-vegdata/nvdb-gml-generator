@@ -4,6 +4,7 @@ import XsdParser.XSD.Component.AllowedAttributesContainer;
 import XsdParser.XSD.Component.Element;
 import XsdParser.XSD.Component.SimpleType.SimpleType;
 import XsdParser.XSD.Component.XSDComponent;
+import XsdParser.XSD.Namespace;
 import XsdParser.XSD.XSDComponentAttribute;
 import XsdParser.XSD.XSDTag;
 import XsdParser.XSD.XSDTagAttribute;
@@ -12,20 +13,20 @@ import java.util.ArrayList;
 
 public class Restriction extends XSDComponent {
 
-    public Restriction(ArrayList<XSDComponentAttribute> xsdComponentAttributes) {
-        super(xsdComponentAttributes);
+    public Restriction(String type, Namespace namespace){
+        super(new XSDComponentAttribute(XSDTagAttribute.BASE,type), namespace);
     }
 
-    public Restriction(XSDComponentAttribute xsdComponentAttribute) {
-        super(xsdComponentAttribute);
+    public Restriction(ArrayList<XSDComponentAttribute> xsdComponentAttributes, Namespace nameSpace) {
+        super(xsdComponentAttributes, nameSpace);
     }
 
-    public Restriction(String type){
-        super(new XSDComponentAttribute(XSDTagAttribute.BASE,type));
+    public Restriction(XSDComponentAttribute xsdComponentAttribute, Namespace nameSpace) {
+        super(xsdComponentAttribute, nameSpace);
     }
 
-    public Restriction() {
-        super();
+    public Restriction(Namespace nameSpace) {
+        super(nameSpace);
     }
 
     @Override

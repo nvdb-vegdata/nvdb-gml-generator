@@ -1,9 +1,11 @@
 package XsdParser.XSD.Component;
 
 import XsdParser.XSD.Component.Restriction.Facet.RestrictionFacet;
+import XsdParser.XSD.Namespace;
 import XsdParser.XSD.XSDComponentAttribute;
 import XsdParser.XSD.XSDTag;
 import XsdParser.XSD.XSDTagAttribute;
+import com.sun.org.apache.xml.internal.utils.NameSpace;
 
 import java.util.ArrayList;
 
@@ -16,29 +18,32 @@ public class Element extends XSDComponent {
         component.setParentComponent(this);
     }
 
-    public Element(XSDComponent component) {
+    //region Constructor
+    public Element(XSDComponent component, Namespace nameSpace) {
+        super(nameSpace);
         this.component = component;
         setComponentParent();
     }
-    public Element(XSDComponentAttribute xsdComponentAttribute) {
-        super(xsdComponentAttribute);
+    public Element(XSDComponentAttribute xsdComponentAttribute, Namespace nameSpace) {
+        super(xsdComponentAttribute, nameSpace);
     }
 
-    public Element(ArrayList<XSDComponentAttribute> xsdComponentAttributes) {
-        super(xsdComponentAttributes);
+    public Element(ArrayList<XSDComponentAttribute> xsdComponentAttributes, Namespace nameSpace) {
+        super(xsdComponentAttributes, nameSpace);
     }
 
-    public Element(XSDComponentAttribute xsdComponentAttribute, XSDComponent component) {
-        super(xsdComponentAttribute);
+    public Element(XSDComponentAttribute xsdComponentAttribute, XSDComponent component, Namespace nameSpace) {
+        super(xsdComponentAttribute, nameSpace);
         this.component = component;
         setComponentParent();
     }
 
-    public Element(ArrayList<XSDComponentAttribute> xsdComponentAttributes, XSDComponent component) {
-        super(xsdComponentAttributes);
+    public Element(ArrayList<XSDComponentAttribute> xsdComponentAttributes, XSDComponent component, Namespace nameSpace) {
+        super(xsdComponentAttributes, nameSpace);
         this.component = component;
         setComponentParent();
     }
+    //endregion
 
     @Override
     protected XSDTag setInitialXsdTag() {
@@ -51,6 +56,7 @@ public class Element extends XSDComponent {
         legalAttributesContainer.addLegalAttribute(XSDTagAttribute.ID);
         legalAttributesContainer.addLegalAttribute(XSDTagAttribute.NAME);
         legalAttributesContainer.addLegalAttribute(XSDTagAttribute.BASE);
+        legalAttributesContainer.addLegalAttribute(XSDTagAttribute.TYPE);
         return legalAttributesContainer;
     }
 

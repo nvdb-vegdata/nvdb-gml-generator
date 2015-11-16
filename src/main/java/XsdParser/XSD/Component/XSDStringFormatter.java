@@ -16,7 +16,7 @@ public class XSDStringFormatter {
             return "";
 
         String camelCaseName = "";
-        if(!words[0].isEmpty())
+        if(!words[0].isEmpty() && words[0].length() > 1)
             camelCaseName += words[0].substring(0,1).toLowerCase() + words[0].substring(1);
         for(int i = 1; i < words.length; i++){
             if(words[i].isEmpty())
