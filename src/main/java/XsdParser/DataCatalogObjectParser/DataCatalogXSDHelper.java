@@ -15,13 +15,13 @@ public class DataCatalogXSDHelper {
         String regex = null;
         switch (timeFormat){
             case "hhmm":
-                regex = "^([01][0-9]|2[0-3])[0-5][0-9]$";
+                regex = "([01][0-9]|2[0-3])[0-5][0-9]";
                 break;
             case "hh:mm":
-                regex = "^([01][0-9]|2[0-3]):[0-5][0-9]$";
+                regex = "([01][0-9]|2[0-3]):[0-5][0-9]";
                 break;
             case "hh:mm:ss":
-                regex = "^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$";
+                regex = "([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]";
                 break;
         }
         return Optional.ofNullable(regex);
@@ -32,16 +32,16 @@ public class DataCatalogXSDHelper {
 
         switch (dateFormat){
             case "åååå-mm-dd":
-                regex = "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$";
+                regex = "[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])";
                 break;
             case "ååååmmdd":
-                regex = "^[0-9]{4}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$";
+                regex = "[0-9]{4}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])";
                 break;
             case "mm-dd":
-                regex = "^(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$";
+                regex = "(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])";
                 break;
             case "mmdd":
-                regex = "^(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$";
+                regex = "(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])";
                 break;
         }
         return Optional.ofNullable(regex);
@@ -93,9 +93,9 @@ public class DataCatalogXSDHelper {
 
     }
     public static String excapeIllegalChars(String value){
-        value = value.replaceAll("&","&amp");
-        value = value.replaceAll("<","&lt");
-        value = value.replaceAll(">","&gt");
+        value = value.replaceAll("&","&amp;");
+        value = value.replaceAll("<","&lt;");
+        value = value.replaceAll(">","&gt;");
 
         return value;
 

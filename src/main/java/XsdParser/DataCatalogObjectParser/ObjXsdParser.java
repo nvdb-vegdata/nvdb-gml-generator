@@ -27,10 +27,10 @@ public class ObjXsdParser implements ObjectParser {
 
     @Override
     public Schema createSchemaTag(String name) {
-        globalNamespace = new Namespace(XSDTagAttribute.XMLNS, "http://www.w3.org/2001/XMLSchema","xsd", "");
+        globalNamespace = new Namespace(XSDTagAttribute.XMLNS, "http://www.w3.org/2001/XMLSchema","xsd", "xs");
         Schema schema = new Schema(name, globalNamespace);
         schema.addNamespace(new Namespace(XSDTagAttribute.XMLNS, "http://www.opengis.net/gml/3.2", "gml", "gml"));
-        schema.addXSDComponentAttribute(new XSDComponentAttribute(XSDTagAttribute.TARGETNAMESPACE, "myNameSpace"));
+        schema.addXSDComponentAttribute(new XSDComponentAttribute(XSDTagAttribute.TARGETNAMESPACE, "http://myNameSpace.com"));
         this.schema = schema;
         return schema;
     }
