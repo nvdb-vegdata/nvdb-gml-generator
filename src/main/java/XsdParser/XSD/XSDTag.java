@@ -5,6 +5,7 @@ package XsdParser.XSD;
  */
 public enum XSDTag{
     SCHEMA("schema"),
+    SEQUENCE("sequence"),
     IMPORT("import"),
     ANNOTATION("annotation"),
     APPINFO("appinfo"),

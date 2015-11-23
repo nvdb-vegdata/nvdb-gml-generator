@@ -17,8 +17,6 @@ import XsdParser.XSD.XSDDataType;
 import XsdParser.XSD.XSDTagAttribute;
 import no.svv.nvdb.api.inn.domain.datacatalog.attribute.*;
 import no.svv.nvdb.api.inn.domain.datacatalog.constraint.EnumStringAttribute;
-
-import javax.swing.text.html.Option;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -138,10 +136,6 @@ public class ObjXsdParser implements ObjectParser {
         return createElement(at, simpleType);
     }
 
-
-
-
-
     private XSDComponent createEnumStringAttribute(EnumStringAttribute enumAttribute){
         return new EnumerationFacet(new XSDComponentAttribute(XSDTagAttribute.VALUE, enumAttribute.getValue()), globalNamespace);
     }
@@ -228,7 +222,5 @@ public class ObjXsdParser implements ObjectParser {
     private boolean isDeprecated(String name){
         return name.toLowerCase().contains("utgår");
     }
-
-
 
 }

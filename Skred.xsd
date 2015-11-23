@@ -1,48 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" targetNamespace="myNameSpace">
-	<element name="skredDato">
-		<annotation>
-			<documentation>
-				Angir dato da skredet gikk
-			</documentation>
-			<appinfo>
-				SkredDato_2324 : 2324
-			</appinfo>
-		</annotation>
-		<simpleType>
+	<element>
+		<complexType>
+			<sequence>
+				<element name="skredDato">
+					<annotation>
+						<documentation>
+							Angir dato da skredet gikk
+						</documentation>
+						<appinfo>
+							SkredDato_2324 : 2324
+						</appinfo>
+					</annotation>
+					<simpleType>
 			<restriction base="string">
 				<pattern value="^[0-9]{4}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$">
 				</pattern>
 			</restriction>
-		</simpleType>
-	</element>
-	<element name="skredKlokkeslett">
-		<annotation>
-			<documentation>
-				Angir klokkeslett da skredet gikk
-			</documentation>
-			<appinfo>
-				SkredKlokkeslett_2325 : 2325
-			</appinfo>
-		</annotation>
-		<simpleType>
+					</simpleType>
+				</element>
+				<element name="skredKlokkeslett">
+					<annotation>
+						<documentation>
+							Angir klokkeslett da skredet gikk
+						</documentation>
+						<appinfo>
+							SkredKlokkeslett_2325 : 2325
+						</appinfo>
+					</annotation>
+					<simpleType>
 			<restriction base="integer">
 				<minInclusive value="-2147483648">
 				</minInclusive>
 				<maxInclusive value="2147483647">
 				</maxInclusive>
 			</restriction>
-		</simpleType>
-	</element>
-	<element name="typeSkred">
-		<annotation>
-			<documentation>
-				Angir hvilken type skred det er tale om
-			</documentation>
-			<appinfo>
-				TypeSkred_2326 : 2326
-			</appinfo>
-		</annotation>
-		<simpleType>
+					</simpleType>
+				</element>
+				<element name="typeSkred">
+					<annotation>
+						<documentation>
+							Angir hvilken type skred det er tale om
+						</documentation>
+						<appinfo>
+							TypeSkred_2326 : 2326
+						</appinfo>
+					</annotation>
+					<simpleType>
 			<restriction base="string">
 				<enumeration value="Stein">
 				</enumeration>
@@ -61,44 +64,44 @@
 				<enumeration value="Utglidning av veg">
 				</enumeration>
 			</restriction>
-		</simpleType>
-	</element>
-	<element name="volumAvSkredmasserPåVeg">
-		<annotation>
-			<documentation>
-				Angir volum av skredmasser på vegen
-			</documentation>
-			<appinfo>
-				VolumAvSkredmasserPåV_2327 : 2327
-			</appinfo>
-		</annotation>
-		<simpleType>
+					</simpleType>
+				</element>
+				<element name="volumAvSkredmasserPåVeg">
+					<annotation>
+						<documentation>
+							Angir volum av skredmasser på vegen
+						</documentation>
+						<appinfo>
+							VolumAvSkredmasserPåV_2327 : 2327
+						</appinfo>
+					</annotation>
+					<simpleType>
 			<restriction base="string">
-				<enumeration value="10 kbm">
+				<enumeration value="<10 kbm">
 				</enumeration>
-				<enumeration value="100 kbm">
+				<enumeration value="< 100 kbm">
 				</enumeration>
-				<enumeration value="1000 kbm">
+				<enumeration value="< 1000 kbm">
 				</enumeration>
-				<enumeration value="1000 kbm">
+				<enumeration value="> 1000 kbm">
 				</enumeration>
 				<enumeration value="Ikke vurdert">
 				</enumeration>
-				<enumeration value="1 kbm">
+				<enumeration value="< 1 kbm">
 				</enumeration>
 			</restriction>
-		</simpleType>
-	</element>
-	<element name="løsneområde">
-		<annotation>
-			<documentation>
-				Angir løsneområde for skredet
-			</documentation>
-			<appinfo>
-				Løsneområde_2328 : 2328
-			</appinfo>
-		</annotation>
-		<simpleType>
+					</simpleType>
+				</element>
+				<element name="løsneområde">
+					<annotation>
+						<documentation>
+							Angir løsneområde for skredet
+						</documentation>
+						<appinfo>
+							Løsneområde_2328 : 2328
+						</appinfo>
+					</annotation>
+					<simpleType>
 			<restriction base="string">
 				<enumeration value="Vegbane/-fylling">
 				</enumeration>
@@ -113,18 +116,18 @@
 				<enumeration value="Inne i tunnel">
 				</enumeration>
 			</restriction>
-		</simpleType>
-	</element>
-	<element name="volumAvTotaleSkredmasser">
-		<annotation>
-			<documentation>
-				Anslag over hvor stort det totale skredet har vært
-			</documentation>
-			<appinfo>
-				VolumAvTotaleSkredmas_2329 : 2329
-			</appinfo>
-		</annotation>
-		<simpleType>
+					</simpleType>
+				</element>
+				<element name="volumAvTotaleSkredmasser">
+					<annotation>
+						<documentation>
+							Anslag over hvor stort det totale skredet har vært
+						</documentation>
+						<appinfo>
+							VolumAvTotaleSkredmas_2329 : 2329
+						</appinfo>
+					</annotation>
+					<simpleType>
 			<restriction base="integer">
 				<annotation>
 					<documentation>
@@ -136,18 +139,18 @@
 				<maxInclusive value="2147483647">
 				</maxInclusive>
 			</restriction>
-		</simpleType>
-	</element>
-	<element name="høydeforskjellVegUtløsningssted">
-		<annotation>
-			<documentation>
-				Angir høydeforskjell mellom skredets utløsningssted og vegen
-			</documentation>
-			<appinfo>
-				HøydeforskjellVegUtlø_2330 : 2330
-			</appinfo>
-		</annotation>
-		<simpleType>
+					</simpleType>
+				</element>
+				<element name="høydeforskjellVegUtløsningssted">
+					<annotation>
+						<documentation>
+							Angir høydeforskjell mellom skredets utløsningssted og vegen
+						</documentation>
+						<appinfo>
+							HøydeforskjellVegUtlø_2330 : 2330
+						</appinfo>
+					</annotation>
+					<simpleType>
 			<restriction base="string">
 				<enumeration value="> 200 m">
 				</enumeration>
@@ -160,131 +163,131 @@
 				<enumeration value="50 - 200 m">
 				</enumeration>
 			</restriction>
-		</simpleType>
-	</element>
-	<element name="vesentligeSkader">
-		<annotation>
-			<documentation>
-				Angir om skredet totalt sett har gitt vesentlige skader eller ikke.
-			</documentation>
-			<appinfo>
-				VesentligeSkader_2331 : 2331
-			</appinfo>
-		</annotation>
-		<simpleType>
+					</simpleType>
+				</element>
+				<element name="vesentligeSkader">
+					<annotation>
+						<documentation>
+							Angir om skredet totalt sett har gitt vesentlige skader eller ikke.
+						</documentation>
+						<appinfo>
+							VesentligeSkader_2331 : 2331
+						</appinfo>
+					</annotation>
+					<simpleType>
 			<restriction base="string">
 				<enumeration value="Ja">
 				</enumeration>
 				<enumeration value="Nei">
 				</enumeration>
 			</restriction>
-		</simpleType>
-	</element>
-	<element name="skadePåPerson">
-		<annotation>
-			<documentation>
-				Angir om skredet har medført skade på person
-			</documentation>
-			<appinfo>
-				SkadePåPerson_2332 : 2332
-			</appinfo>
-		</annotation>
-		<simpleType>
+					</simpleType>
+				</element>
+				<element name="skadePåPerson">
+					<annotation>
+						<documentation>
+							Angir om skredet har medført skade på person
+						</documentation>
+						<appinfo>
+							SkadePåPerson_2332 : 2332
+						</appinfo>
+					</annotation>
+					<simpleType>
 			<restriction base="string">
 				<enumeration value="Ja">
 				</enumeration>
 				<enumeration value="Nei">
 				</enumeration>
 			</restriction>
-		</simpleType>
-	</element>
-	<element name="skadePåKjøretøy">
-		<annotation>
-			<documentation>
-				Angir om skredet har medført skade på kjøretøy
-			</documentation>
-			<appinfo>
-				SkadePåKjøretøy_2333 : 2333
-			</appinfo>
-		</annotation>
-		<simpleType>
+					</simpleType>
+				</element>
+				<element name="skadePåKjøretøy">
+					<annotation>
+						<documentation>
+							Angir om skredet har medført skade på kjøretøy
+						</documentation>
+						<appinfo>
+							SkadePåKjøretøy_2333 : 2333
+						</appinfo>
+					</annotation>
+					<simpleType>
 			<restriction base="string">
 				<enumeration value="Ja">
 				</enumeration>
 				<enumeration value="Nei">
 				</enumeration>
 			</restriction>
-		</simpleType>
-	</element>
-	<element name="skadePåVegdekkeVegkropp">
-		<annotation>
-			<documentation>
-				Angir om skredet har medført skade på vegdekke og/eller vegkropp
-			</documentation>
-			<appinfo>
-				SkadePåVegdekkeVegkro_2334 : 2334
-			</appinfo>
-		</annotation>
-		<simpleType>
+					</simpleType>
+				</element>
+				<element name="skadePåVegdekkeVegkropp">
+					<annotation>
+						<documentation>
+							Angir om skredet har medført skade på vegdekke og/eller vegkropp
+						</documentation>
+						<appinfo>
+							SkadePåVegdekkeVegkro_2334 : 2334
+						</appinfo>
+					</annotation>
+					<simpleType>
 			<restriction base="string">
 				<enumeration value="Ja">
 				</enumeration>
 				<enumeration value="Nei">
 				</enumeration>
 			</restriction>
-		</simpleType>
-	</element>
-	<element name="skadePåBru">
-		<annotation>
-			<documentation>
-				Angir om skredet har medført skade på bru
-			</documentation>
-			<appinfo>
-				SkadePåBru_2335 : 2335
-			</appinfo>
-		</annotation>
-		<simpleType>
+					</simpleType>
+				</element>
+				<element name="skadePåBru">
+					<annotation>
+						<documentation>
+							Angir om skredet har medført skade på bru
+						</documentation>
+						<appinfo>
+							SkadePåBru_2335 : 2335
+						</appinfo>
+					</annotation>
+					<simpleType>
 			<restriction base="string">
 				<enumeration value="Ja">
 				</enumeration>
 				<enumeration value="Nei">
 				</enumeration>
 			</restriction>
-		</simpleType>
-	</element>
-	<element name="skadePåRekkverk">
-		<annotation>
-			<documentation>
-				Angir om skredet har medført skade på rekkverk
-			</documentation>
-			<appinfo>
-				SkadePåRekkverk_2336 : 2336
-			</appinfo>
-		</annotation>
-		<simpleType>
+					</simpleType>
+				</element>
+				<element name="skadePåRekkverk">
+					<annotation>
+						<documentation>
+							Angir om skredet har medført skade på rekkverk
+						</documentation>
+						<appinfo>
+							SkadePåRekkverk_2336 : 2336
+						</appinfo>
+					</annotation>
+					<simpleType>
 			<restriction base="string">
 				<enumeration value="Ja">
 				</enumeration>
 				<enumeration value="Nei">
 				</enumeration>
 			</restriction>
-		</simpleType>
-	</element>
-	<element name="temperaturPåVeg">
-		<annotation>
-			<documentation>
-				Angir lufttemperatur på/ved vegen der skredet har inntruffet.
-			</documentation>
-			<appinfo>
-				TemperaturPåVeg_5153 : 5153
-			</appinfo>
-		</annotation>
-		<simpleType>
-			<annotation>
-				<documentation>
-					Enhet: Grader Celcius (9)
-				</documentation>
-			</annotation>
+					</simpleType>
+				</element>
+				<element name="temperaturPåVeg">
+					<annotation>
+						<documentation>
+							Angir lufttemperatur på/ved vegen der skredet har inntruffet.
+						</documentation>
+						<appinfo>
+							TemperaturPåVeg_5153 : 5153
+						</appinfo>
+					</annotation>
+					<simpleType>
+						<annotation>
+							<documentation>
+								Enhet: Grader Celcius (9)
+							</documentation>
+						</annotation>
 			<restriction base="decimal">
 				<minInclusive value="-999.9">
 				</minInclusive>
@@ -293,50 +296,50 @@
 				<fractionDigits value="1">
 				</fractionDigits>
 			</restriction>
-		</simpleType>
-	</element>
-	<element name="stedsangivelse">
-		<annotation>
-			<documentation>
-				Stedsnavn hvor forekomst er lokalisert.  Evt plassering i forhold til stedsnavn.
-			</documentation>
-			<appinfo>
-				Stedsangivelse_7905 : 7905
-			</appinfo>
-		</annotation>
-		<simpleType>
+					</simpleType>
+				</element>
+				<element name="stedsangivelse">
+					<annotation>
+						<documentation>
+							Stedsnavn hvor forekomst er lokalisert.  Evt plassering i forhold til stedsnavn.
+						</documentation>
+						<appinfo>
+							Stedsangivelse_7905 : 7905
+						</appinfo>
+					</annotation>
+					<simpleType>
 			<restriction base="string">
 			</restriction>
-		</simpleType>
-	</element>
-	<element name="skadePåDrenering">
-		<annotation>
-			<documentation>
-				Angir om skredet har medført skade på drenering
-			</documentation>
-			<appinfo>
-				SkadePåDrenering_2338 : 2338
-			</appinfo>
-		</annotation>
-		<simpleType>
+					</simpleType>
+				</element>
+				<element name="skadePåDrenering">
+					<annotation>
+						<documentation>
+							Angir om skredet har medført skade på drenering
+						</documentation>
+						<appinfo>
+							SkadePåDrenering_2338 : 2338
+						</appinfo>
+					</annotation>
+					<simpleType>
 			<restriction base="string">
 				<enumeration value="Ja">
 				</enumeration>
 				<enumeration value="Nei">
 				</enumeration>
 			</restriction>
-		</simpleType>
-	</element>
-	<element name="værforholdPåVegen">
-		<annotation>
-			<documentation>
-				Angir hvilke værforhold det var på vegen da skredet gikk
-			</documentation>
-			<appinfo>
-				VærforholdPåVegen_2339 : 2339
-			</appinfo>
-		</annotation>
-		<simpleType>
+					</simpleType>
+				</element>
+				<element name="værforholdPåVegen">
+					<annotation>
+						<documentation>
+							Angir hvilke værforhold det var på vegen da skredet gikk
+						</documentation>
+						<appinfo>
+							VærforholdPåVegen_2339 : 2339
+						</appinfo>
+					</annotation>
+					<simpleType>
 			<restriction base="string">
 				<enumeration value="Ingen nedbør">
 				</enumeration>
@@ -357,18 +360,18 @@
 				<enumeration value="Snø, mye">
 				</enumeration>
 			</restriction>
-		</simpleType>
-	</element>
-	<element name="vindretning">
-		<annotation>
-			<documentation>
-				Angir hvilken vindretning det var på vegen da skredet gikk
-			</documentation>
-			<appinfo>
-				Vindretning_2340 : 2340
-			</appinfo>
-		</annotation>
-		<simpleType>
+					</simpleType>
+				</element>
+				<element name="vindretning">
+					<annotation>
+						<documentation>
+							Angir hvilken vindretning det var på vegen da skredet gikk
+						</documentation>
+						<appinfo>
+							Vindretning_2340 : 2340
+						</appinfo>
+					</annotation>
+					<simpleType>
 			<restriction base="string">
 				<enumeration value="SSV">
 				</enumeration>
@@ -405,79 +408,79 @@
 				<enumeration value="S">
 				</enumeration>
 			</restriction>
-		</simpleType>
-	</element>
-	<element name="blokkertVeglengde">
-		<annotation>
-			<documentation>
-				Angir lengde av veg som var blokkert av skredet
-			</documentation>
-			<appinfo>
-				BlokkertVeglengde_2341 : 2341
-			</appinfo>
-		</annotation>
-		<simpleType>
+					</simpleType>
+				</element>
+				<element name="blokkertVeglengde">
+					<annotation>
+						<documentation>
+							Angir lengde av veg som var blokkert av skredet
+						</documentation>
+						<appinfo>
+							BlokkertVeglengde_2341 : 2341
+						</appinfo>
+					</annotation>
+					<simpleType>
 			<restriction base="string">
-				<enumeration value="10 m">
+				<enumeration value="< 10 m">
 				</enumeration>
 				<enumeration value="10 - 50 m">
 				</enumeration>
 				<enumeration value="50 - 100 m">
 				</enumeration>
-				<enumeration value="100 m">
+				<enumeration value="> 100 m">
 				</enumeration>
 				<enumeration value="Kun i grøft">
 				</enumeration>
 			</restriction>
-		</simpleType>
-	</element>
-	<element name="registreringsansvarlig">
-		<annotation>
-			<documentation>
-				Angir hvem som er ansvarlig for registrert informasjon om skredet
-			</documentation>
-			<appinfo>
-				Registreringsansvarli_7845 : 7845
-			</appinfo>
-		</annotation>
-		<simpleType>
+					</simpleType>
+				</element>
+				<element name="registreringsansvarlig">
+					<annotation>
+						<documentation>
+							Angir hvem som er ansvarlig for registrert informasjon om skredet
+						</documentation>
+						<appinfo>
+							Registreringsansvarli_7845 : 7845
+						</appinfo>
+					</annotation>
+					<simpleType>
 			<restriction base="string">
 			</restriction>
-		</simpleType>
-	</element>
-	<element name="blokkertGangSykkelveg">
-		<annotation>
-			<documentation>
-				Angir om gang/sykkelveg er blitt blokkert av skredet
-			</documentation>
-			<appinfo>
-				BlokkertGangSykkelveg_2342 : 2342
-			</appinfo>
-		</annotation>
-		<simpleType>
+					</simpleType>
+				</element>
+				<element name="blokkertGangSykkelveg">
+					<annotation>
+						<documentation>
+							Angir om gang/sykkelveg er blitt blokkert av skredet
+						</documentation>
+						<appinfo>
+							BlokkertGangSykkelveg_2342 : 2342
+						</appinfo>
+					</annotation>
+					<simpleType>
 			<restriction base="string">
 				<enumeration value="Ja">
 				</enumeration>
 				<enumeration value="Nei">
 				</enumeration>
 			</restriction>
-		</simpleType>
-	</element>
-	<element name="grøftebreddePåSkredside">
-		<annotation>
-			<documentation>
-				Angir grøftebredde på skredside
-			</documentation>
-			<appinfo>
-				GrøftebreddePåSkredsi_2343 : 2343
-			</appinfo>
-		</annotation>
-		<simpleType>
-			<annotation>
-				<documentation>
-					Enhet: Meter (1)
-				</documentation>
-			</annotation>
+					</simpleType>
+				</element>
+				<element name="grøftebreddePåSkredside">
+					<annotation>
+						<documentation>
+							Angir grøftebredde på skredside
+						</documentation>
+						<appinfo>
+							GrøftebreddePåSkredsi_2343 : 2343
+						</appinfo>
+					</annotation>
+					<simpleType>
+						<annotation>
+							<documentation>
+								Enhet: Meter (1)
+							</documentation>
+						</annotation>
 			<restriction base="decimal">
 				<minInclusive value="0.0">
 				</minInclusive>
@@ -486,18 +489,18 @@
 				<fractionDigits value="1">
 				</fractionDigits>
 			</restriction>
-		</simpleType>
-	</element>
-	<element name="stengning">
-		<annotation>
-			<documentation>
-				Gir informasjon om eventuell stengning av vegen
-			</documentation>
-			<appinfo>
-				Stengning_2344 : 2344
-			</appinfo>
-		</annotation>
-		<simpleType>
+					</simpleType>
+				</element>
+				<element name="stengning">
+					<annotation>
+						<documentation>
+							Gir informasjon om eventuell stengning av vegen
+						</documentation>
+						<appinfo>
+							Stengning_2344 : 2344
+						</appinfo>
+					</annotation>
+					<simpleType>
 			<restriction base="string">
 				<enumeration value="Ingen stengning">
 				</enumeration>
@@ -510,25 +513,282 @@
 				<enumeration value="Stengt for all trafikk">
 				</enumeration>
 			</restriction>
-		</simpleType>
-	</element>
-	<element name="bilder">
-		<annotation>
-			<documentation>
-				Angir om det finnes bilder av skredet eller ikke.
-			</documentation>
-			<appinfo>
-				Bilder_2355 : 2355
-			</appinfo>
-		</annotation>
-		<simpleType>
+					</simpleType>
+				</element>
+				<element name="utgårStengtFraDato">
+					<annotation>
+						<documentation>
+							Angir dato for når vegen ble steng
+						</documentation>
+						<appinfo>
+							Utgår_StengtFraDato_2345 : 2345
+						</appinfo>
+					</annotation>
+					<simpleType>
+			<restriction base="string">
+				<pattern value="^[0-9]{4}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$">
+				</pattern>
+			</restriction>
+					</simpleType>
+				</element>
+				<element name="utgårStengtFraKlokkeslett">
+					<annotation>
+						<documentation>
+							Angir klokkeslett for stengning av vegen.
+						</documentation>
+						<appinfo>
+							Utgår_StengtFraKlokke_2346 : 2346
+						</appinfo>
+					</annotation>
+					<simpleType>
+			<restriction base="integer">
+				<minInclusive value="-2147483648">
+				</minInclusive>
+				<maxInclusive value="2147483647">
+				</maxInclusive>
+			</restriction>
+					</simpleType>
+				</element>
+				<element name="utgårÅpentFraDato">
+					<annotation>
+						<documentation>
+							Angir dato for åpning av vegen.
+						</documentation>
+						<appinfo>
+							Utgår_ÅpentFraDato_2347 : 2347
+						</appinfo>
+					</annotation>
+					<simpleType>
+			<restriction base="string">
+				<pattern value="^[0-9]{4}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$">
+				</pattern>
+			</restriction>
+					</simpleType>
+				</element>
+				<element name="utgårÅpentFraKlokkeslett">
+					<annotation>
+						<documentation>
+							Angir klokkeslett for åpning av vegen.
+						</documentation>
+						<appinfo>
+							Utgår_ÅpentFraKlokkes_2348 : 2348
+						</appinfo>
+					</annotation>
+					<simpleType>
+			<restriction base="integer">
+				<minInclusive value="-2147483648">
+				</minInclusive>
+				<maxInclusive value="2147483647">
+				</maxInclusive>
+			</restriction>
+					</simpleType>
+				</element>
+				<element name="utgårMengdeRegn">
+					<annotation>
+						<documentation>
+							Angir mengde regn (mm/døgn) målt ved værstasjon.
+						</documentation>
+						<appinfo>
+							Utgår_MengdeRegn_2349 : 2349
+						</appinfo>
+					</annotation>
+					<simpleType>
+			<restriction base="integer">
+				<annotation>
+					<documentation>
+						Enhet: Millimeter (4)
+					</documentation>
+				</annotation>
+				<minInclusive value="-2147483648">
+				</minInclusive>
+				<maxInclusive value="2147483647">
+				</maxInclusive>
+			</restriction>
+					</simpleType>
+				</element>
+				<element name="utgårMengdeVåtSnøSludd">
+					<annotation>
+						<documentation>
+							Angir mengde våt snø/sludd (mm/døgn) målt ved værstasjon
+						</documentation>
+						<appinfo>
+							Utgår_MengdeVåtSnøSlu_2350 : 2350
+						</appinfo>
+					</annotation>
+					<simpleType>
+			<restriction base="integer">
+				<annotation>
+					<documentation>
+						Enhet: Millimeter (4)
+					</documentation>
+				</annotation>
+				<minInclusive value="-2147483648">
+				</minInclusive>
+				<maxInclusive value="2147483647">
+				</maxInclusive>
+			</restriction>
+					</simpleType>
+				</element>
+				<element name="utgårVindretningVedVærstasjon">
+					<annotation>
+						<documentation>
+							Angir vindretning ved værstasjon
+						</documentation>
+						<appinfo>
+							Utgår_VindretningVedV_4526 : 4526
+						</appinfo>
+					</annotation>
+					<simpleType>
+			<restriction base="string">
+				<enumeration value="SV">
+				</enumeration>
+				<enumeration value="VSV">
+				</enumeration>
+				<enumeration value="V">
+				</enumeration>
+				<enumeration value="VNV">
+				</enumeration>
+				<enumeration value="NV">
+				</enumeration>
+				<enumeration value="NNV">
+				</enumeration>
+				<enumeration value="N">
+				</enumeration>
+				<enumeration value="NNØ">
+				</enumeration>
+				<enumeration value="NØ">
+				</enumeration>
+				<enumeration value="ØNØ">
+				</enumeration>
+				<enumeration value="Ø">
+				</enumeration>
+				<enumeration value="ØSØ">
+				</enumeration>
+				<enumeration value="SØ">
+				</enumeration>
+				<enumeration value="SSØ">
+				</enumeration>
+				<enumeration value="S">
+				</enumeration>
+				<enumeration value="SSV">
+				</enumeration>
+			</restriction>
+					</simpleType>
+				</element>
+				<element name="utgårMengdeSnø">
+					<annotation>
+						<documentation>
+							Angir mengde snø (mm/døgn) målt ved værstasjon
+						</documentation>
+						<appinfo>
+							Utgår_MengdeSnø_2351 : 2351
+						</appinfo>
+					</annotation>
+					<simpleType>
+			<restriction base="integer">
+				<annotation>
+					<documentation>
+						Enhet: Millimeter (4)
+					</documentation>
+				</annotation>
+				<minInclusive value="-2147483648">
+				</minInclusive>
+				<maxInclusive value="2147483647">
+				</maxInclusive>
+			</restriction>
+					</simpleType>
+				</element>
+				<element name="utgårVindstyrkeVVærstasjon">
+					<annotation>
+						<documentation>
+							Angir vindstyrke målt ved værstasjon
+						</documentation>
+						<appinfo>
+							Utgår_VindstyrkeVVærs_2352 : 2352
+						</appinfo>
+					</annotation>
+					<simpleType>
+			<restriction base="integer">
+				<annotation>
+					<documentation>
+						Enhet: Meter/sekund (8)
+					</documentation>
+				</annotation>
+				<minInclusive value="-2147483648">
+				</minInclusive>
+				<maxInclusive value="2147483647">
+				</maxInclusive>
+			</restriction>
+					</simpleType>
+				</element>
+				<element name="utgårTemperaturVVærstasjon">
+					<annotation>
+						<documentation>
+							Angir temperatur målt ved værstasjon
+						</documentation>
+						<appinfo>
+							Utgår_TemperaturVVærs_2353 : 2353
+						</appinfo>
+					</annotation>
+					<simpleType>
+						<annotation>
+							<documentation>
+								Enhet: Grader Celcius (9)
+							</documentation>
+						</annotation>
+			<restriction base="decimal">
+				<minInclusive value="-999.9">
+				</minInclusive>
+				<maxInclusive value="999.9">
+				</maxInclusive>
+				<fractionDigits value="1">
+				</fractionDigits>
+			</restriction>
+					</simpleType>
+				</element>
+				<element name="utgårNedbørSisteDøgn">
+					<annotation>
+						<documentation>
+							Angir total nedbørsmengde siste tre døgn målt ved værstasjon.
+						</documentation>
+						<appinfo>
+							Utgår_NedbørSiste3Døg_2354 : 2354
+						</appinfo>
+					</annotation>
+					<simpleType>
+			<restriction base="integer">
+				<annotation>
+					<documentation>
+						Enhet: Millimeter (4)
+					</documentation>
+				</annotation>
+				<minInclusive value="-2147483648">
+				</minInclusive>
+				<maxInclusive value="2147483647">
+				</maxInclusive>
+			</restriction>
+					</simpleType>
+				</element>
+				<element name="bilder">
+					<annotation>
+						<documentation>
+							Angir om det finnes bilder av skredet eller ikke.
+						</documentation>
+						<appinfo>
+							Bilder_2355 : 2355
+						</appinfo>
+					</annotation>
+					<simpleType>
 			<restriction base="string">
 				<enumeration value="Ja">
 				</enumeration>
 				<enumeration value="Nei">
 				</enumeration>
 			</restriction>
-		</simpleType>
+					</simpleType>
+				</element>
+			</sequence>
+		</complexType>
 	</element>
 </schema>
 

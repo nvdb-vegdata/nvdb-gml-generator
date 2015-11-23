@@ -1,7 +1,8 @@
 package XsdParser.Parser;
 
-import XsdParser.XSD.Component.Schema;
-import XsdParser.XSD.Component.XSDComponent;
+import XsdParser.XSD.Component.*;
+import XsdParser.XSD.XSDComponentAttribute;
+import XsdParser.XSD.XSDTagAttribute;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,14 @@ public class SchemaDefinition {
     private XSDComponent currentXSDComponent;
     public void addSchemaTag(Schema schema){
         this.schema = schema;
-        currentXSDComponent = schema;
+        ComplexType complexType = new ComplexType(schema.getNamespace().get());
+        Sequence sequence = new Sequence(schema.getNamespace().get());
+        complexType.addChildComponent(sequence, complexType);
+
+
+        Element mainElement = new Element(complexType,schema.getNamespace().get());
+        schema.addChildComponent(mainElement,schema);
+        currentXSDComponent = sequence;
     }
 
     public void addComponent(XSDComponent xsdComponent){
