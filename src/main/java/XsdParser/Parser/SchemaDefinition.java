@@ -1,7 +1,8 @@
 package XsdParser.Parser;
 
-import XsdParser.XSD.Component.Schema;
-import XsdParser.XSD.Component.XSDComponent;
+import XsdParser.XSD.Component.*;
+import XsdParser.XSD.XSDComponentAttribute;
+import XsdParser.XSD.XSDTagAttribute;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,12 @@ public class SchemaDefinition {
     private XSDComponent currentXSDComponent;
     public void addSchemaTag(Schema schema){
         this.schema = schema;
-        currentXSDComponent = schema;
+        ComplexType complexType = new ComplexType(schema.getNamespace().get());
+        Sequence sequence = new Sequence(schema.getNamespace().get());
+        complexType.addChildComponent(sequence, complexType);
+        Element mainElement = new Element(schema.getMainElementName(),complexType,schema.getNamespace().get());
+        schema.addChildComponent(mainElement,schema);
+        currentXSDComponent = sequence;
     }
 
     public void addComponent(XSDComponent xsdComponent){
@@ -22,15 +28,14 @@ public class SchemaDefinition {
     }
 
     public void exitToParentComponent(){
-        currentXSDComponent = currentXSDComponent.getParentComponent();
+        if(currentXSDComponent.getParentComponent().isPresent()){
+            currentXSDComponent = currentXSDComponent.getParentComponent().get();
+        }
     }
 
     /**
      * Method to remove element components flagged with "deprecated" from the schema definition
      */
-    public void clean(){
-        schema.removeDeprecatedElements();
-    }
 
     //Test method
     public String unLoad(){

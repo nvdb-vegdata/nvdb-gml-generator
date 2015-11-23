@@ -10,6 +10,7 @@ public class XSDComponentAttribute {
     }
 
 
+
     public String getValue() {
         return value;
     }

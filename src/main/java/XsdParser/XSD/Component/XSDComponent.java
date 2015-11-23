@@ -9,6 +9,7 @@ import XsdParser.XSD.Namespace;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public abstract class XSDComponent {
     private final XSDTag xsdTag;
@@ -61,15 +62,11 @@ public abstract class XSDComponent {
         this.deprecated = deprecated;
     }
 
-    private int getDepth(int depth, XSDComponent component){
-        if(component.getParentComponent() == null){
-            return depth;
-        }
-        if(component instanceof Restriction){
-            return depth + 3;
-        }
-        return getDepth(depth +1, component.getParentComponent());
+    public int getDepth(){
+        if(!getParentComponent().isPresent())return 0;
+       return getParentComponent().get().getDepth() + 1;
     }
+
 
     public Optional<Namespace> getNamespace() {
         return Optional.of(namespace);
@@ -91,13 +88,15 @@ public abstract class XSDComponent {
     public String unLoad() {
         String[] res = {""};
         res[0] += getStartTag();
-        getChildComponents().forEach(child -> res[0] += child.unLoad());
+        getChildComponents().forEach(child -> {
+            if(!child.isDeprecated()) res[0] += child.unLoad();
+        });
         res[0] += getEndTag();
         return res[0];
     }
 
     public String addTab(){
-        int depth = getDepth(0, this);
+        int depth = getDepth();
         String tabString = "";
         for(int i = 1; i <= depth; i++){
             tabString += "\t";
@@ -126,8 +125,8 @@ public abstract class XSDComponent {
         this.parentComponent = xsdComponent;
     }
 
-    public XSDComponent getParentComponent() {
-        return parentComponent;
+    public Optional<XSDComponent> getParentComponent() {
+        return Optional.ofNullable(parentComponent);
     }
 
     public void addChildComponent(XSDComponent child, XSDComponent parentComponent){

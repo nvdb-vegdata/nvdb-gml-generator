@@ -47,8 +47,7 @@ public class Master {
         if(featureType == null)return;
         ObjectParser parser = new ObjXsdParser();
         XsdBuilder builder = new XsdBuilder(parser);
-        SchemaDefinition schemaDefinition = builder.generateSchemaDefinition(featureType.attributeTypes().toArray());
-        schemaDefinition.clean();
+        SchemaDefinition schemaDefinition = builder.generateSchemaDefinition(featureType.attributeTypes().toArray(), featureType.getName());
         System.out.println(schemaDefinition.unLoad());
         printToFile(schemaDefinition.unLoad());
         //test(featureType);

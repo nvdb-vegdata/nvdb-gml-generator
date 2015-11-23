@@ -10,7 +10,7 @@ import java.util.Optional;
  */
 public interface ObjectParser {
 
-    public Schema createSchemaTag();
+    public Schema createSchemaTag(String mainElementName);
 
     public Optional<XSDComponent> translate(Object object);
 }

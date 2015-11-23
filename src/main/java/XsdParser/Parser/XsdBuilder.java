@@ -11,9 +11,9 @@ public class XsdBuilder implements IteratorListener {
         this.objectParser = objectParser;
     }
 
-    public SchemaDefinition generateSchemaDefinition(Object object){
+    public SchemaDefinition generateSchemaDefinition(Object object, String name){
         schemaDefinition = new SchemaDefinition();
-        schemaDefinition.addSchemaTag(objectParser.createSchemaTag());
+        schemaDefinition.addSchemaTag(objectParser.createSchemaTag(name));
         ObjectIterator objectIterator = new ObjectIterator(object.getClass().getName(),  this, object);
         objectIterator.iterate();
         return schemaDefinition;

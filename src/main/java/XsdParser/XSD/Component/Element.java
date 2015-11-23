@@ -19,8 +19,8 @@ public class Element extends XSDComponent {
     }
 
     //region Constructor
-    public Element(XSDComponent component, Namespace nameSpace) {
-        super(nameSpace);
+    public Element(String mainElementName,XSDComponent component, Namespace nameSpace) {
+        super(new XSDComponentAttribute(XSDTagAttribute.NAME, mainElementName), nameSpace);
         this.component = component;
         setComponentParent();
     }

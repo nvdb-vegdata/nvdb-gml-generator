@@ -7,8 +7,10 @@ import XsdParser.XSD.Component.SimpleType.SimpleType;
 import XsdParser.XSD.Component.XSDComponent;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Restriction extends XSDComponent {
+    private final int  EXTRA_RESTRICTION_DEPTH = 2;
 
     public Restriction(XSDDataType dataType, Namespace namespace){
         super(new XSDComponentAttribute(XSDTagAttribute.BASE, dataType.toStringWithPrefix(namespace)), namespace);
@@ -39,18 +41,14 @@ public class Restriction extends XSDComponent {
         return legalAttributesContainer;
     }
 
-    //TODO DO this another way, jesus
     @Override
-    public XSDComponent getParentComponent(){
-        if(super.getParentComponent() instanceof SimpleType){
+    public Optional<XSDComponent> getParentComponent(){
+        return super.getParentComponent().get().getParentComponent().get().getParentComponent();
+    }
 
-            if (super.getParentComponent().getParentComponent() instanceof Element){
-                return super.getParentComponent().getParentComponent().getParentComponent();
-            }else {
-                return super.getParentComponent().getParentComponent();
-            }
-        }
-        return super.getParentComponent();
+    @Override
+    public int getDepth(){
+        return super.getDepth() + EXTRA_RESTRICTION_DEPTH;
     }
 
     @Override

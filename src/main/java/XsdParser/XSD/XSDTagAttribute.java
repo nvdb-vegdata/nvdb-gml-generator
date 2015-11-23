@@ -20,7 +20,13 @@ public enum XSDTagAttribute {
     TYPE("type"),
     SUBSTITUTIONGROUP("subtitutiongroup"),
     SOURCE("source"),
-    ABSTRACT("abstract");
+    ABSTRACT("abstract"),
+    MINOCCURS("minOccurs"),
+    MAXOCCURS("maxOccurs"),
+    MIXED("mixed"),
+    BLOCK("block"),
+    FINAL("final"),
+    ;
 
     private final String text;
 

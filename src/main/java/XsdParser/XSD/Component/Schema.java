@@ -17,10 +17,12 @@ public class Schema extends XSDComponent {
         return XSDTag.SCHEMA;
     }
     private Map<String, Namespace> namespaces = new HashMap<>();
+    private String mainElementName;
 
 
-    public Schema(Namespace namespace) {
+    public Schema(String mainElementName,Namespace namespace) {
         super(namespace);
+        this.mainElementName = mainElementName;
         namespaces.put(namespace.getName(), namespace);
         addXSDComponentAttribute(namespace);
     }
@@ -41,14 +43,6 @@ public class Schema extends XSDComponent {
         return Optional.of(namespaces.get(name));
     }
 
-
-    public void removeDeprecatedElements(){
-        ArrayList<XSDComponent> updatedList =  getChildComponents()
-                .stream()
-                .filter(child -> !child.isDeprecated())
-                .collect(Collectors.toCollection(ArrayList<XSDComponent>::new));
-        setChildComponents(updatedList);
-    }
     @Override
     protected AllowedAttributesContainer setLegalAttributes() {
         AllowedAttributesContainer attributesContainer = new AllowedAttributesContainer();
@@ -67,5 +61,9 @@ public class Schema extends XSDComponent {
         getChildComponents().forEach(child -> res[0] += child.unLoad());
         res[0] += getEndTag();
         return res[0];
+    }
+
+    public String getMainElementName() {
+        return mainElementName;
     }
 }

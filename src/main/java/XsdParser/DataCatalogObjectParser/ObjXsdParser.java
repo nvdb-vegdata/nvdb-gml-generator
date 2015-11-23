@@ -17,8 +17,6 @@ import XsdParser.XSD.XSDDataType;
 import XsdParser.XSD.XSDTagAttribute;
 import no.svv.nvdb.api.inn.domain.datacatalog.attribute.*;
 import no.svv.nvdb.api.inn.domain.datacatalog.constraint.EnumStringAttribute;
-
-import javax.swing.text.html.Option;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -28,9 +26,9 @@ public class ObjXsdParser implements ObjectParser {
     private Namespace globalNamespace;
 
     @Override
-    public Schema createSchemaTag() {
+    public Schema createSchemaTag(String name) {
         globalNamespace = new Namespace(XSDTagAttribute.XMLNS, "http://www.w3.org/2001/XMLSchema","xsd", "");
-        Schema schema = new Schema(globalNamespace);
+        Schema schema = new Schema(name, globalNamespace);
         schema.addNamespace(new Namespace(XSDTagAttribute.XMLNS, "http://www.opengis.net/gml/3.2", "gml", "gml"));
         schema.addXSDComponentAttribute(new XSDComponentAttribute(XSDTagAttribute.TARGETNAMESPACE, "myNameSpace"));
         this.schema = schema;
@@ -42,7 +40,7 @@ public class ObjXsdParser implements ObjectParser {
         XSDComponent component = null;
         if(object instanceof StringAttributeType){
             XSDDataType dataType = DataCatalogXSDHelper.getXSDDatatype((AttributeType)object);
-            component = createStringAttribute((StringAttributeType)object, dataType);
+            component = createStringAttribute((StringAttributeType) object, dataType);
         } else if( object instanceof EnumStringAttribute){
             component = createEnumStringAttribute((EnumStringAttribute)object);
         }  else if(object instanceof IntegerAttributeType){
@@ -63,9 +61,9 @@ public class ObjXsdParser implements ObjectParser {
         } else if(object instanceof BoolAttributeType) {
             XSDDataType dataType = DataCatalogXSDHelper.getXSDDatatype((AttributeType)object);
             component = createBooleanAttribute((BoolAttributeType)object, dataType);
-        } /*else if(object instanceof SpatialAttributeType){
-            component = createSpatialAttribute((SpatialAttributeType)object, dataType);
-        }*/
+        } else if(object instanceof SpatialAttributeType){
+            component = createSpatialAttribute((SpatialAttributeType)object);
+        }
 
 
         return Optional.ofNullable(component);
@@ -138,12 +136,9 @@ public class ObjXsdParser implements ObjectParser {
         return createElement(at, simpleType);
     }
 
-
-
-
-
     private XSDComponent createEnumStringAttribute(EnumStringAttribute enumAttribute){
-        return new EnumerationFacet(new XSDComponentAttribute(XSDTagAttribute.VALUE, enumAttribute.getValue()), globalNamespace);
+        String value = DataCatalogXSDHelper.excapeIllegalChars(enumAttribute.getValue());
+        return new EnumerationFacet(new XSDComponentAttribute(XSDTagAttribute.VALUE, value), globalNamespace);
     }
 
     private XSDComponent createStringAttribute(StringAttributeType at, XSDDataType dataType){
@@ -207,9 +202,7 @@ public class ObjXsdParser implements ObjectParser {
         Annotation annotation = createGeneralAnnotation(at);
         Element element = new Element(attributes, globalNamespace);
         element.addChildComponent(annotation, element);
-        if(isDeprecated(at.getName())){
-            element.setDeprecated(true);
-        }
+        element.setDeprecated(isDeprecated(at));
         return element;
     }
 
@@ -219,16 +212,13 @@ public class ObjXsdParser implements ObjectParser {
         XSDComponentAttribute nameAttribute = new XSDComponentAttribute(XSDTagAttribute.NAME,elementName);
         Element element = new Element(nameAttribute, component, globalNamespace);
         element.addChildComponent(annotation, element);
-        if(isDeprecated(at.getName())){
-            element.setDeprecated(true);
-        }
+        element.setDeprecated(isDeprecated(at));
         return element;
     }
 
-    private boolean isDeprecated(String name){
-        return name.toLowerCase().contains("utgår");
+    private boolean isDeprecated(AttributeType at){
+        return at.getName().toLowerCase().contains("utgår");
     }
-
 
 
 }
