@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" targetNamespace="myNameSpace">
-	<element>
+	<element name="Skred">
 		<complexType>
 			<sequence>
+				<element name="geometriFlate" type="gml:SurfacePropertyType">
+					<annotation>
+						<documentation>
+							Gir flate/polygon som geometrisk avgrenser området
+						</documentation>
+						<appinfo>
+							GeometriFlate_8912 : 8912
+						</appinfo>
+					</annotation>
+				</element>
 				<element name="skredDato">
 					<annotation>
 						<documentation>
@@ -12,10 +22,10 @@
 						</appinfo>
 					</annotation>
 					<simpleType>
-			<restriction base="string">
-				<pattern value="^[0-9]{4}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$">
-				</pattern>
-			</restriction>
+						<restriction base="string">
+							<pattern value="^[0-9]{4}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$">
+							</pattern>
+						</restriction>
 					</simpleType>
 				</element>
 				<element name="skredKlokkeslett">
@@ -28,12 +38,12 @@
 						</appinfo>
 					</annotation>
 					<simpleType>
-			<restriction base="integer">
-				<minInclusive value="-2147483648">
-				</minInclusive>
-				<maxInclusive value="2147483647">
-				</maxInclusive>
-			</restriction>
+						<restriction base="integer">
+							<minInclusive value="-2147483648">
+							</minInclusive>
+							<maxInclusive value="2147483647">
+							</maxInclusive>
+						</restriction>
 					</simpleType>
 				</element>
 				<element name="typeSkred">
@@ -46,24 +56,24 @@
 						</appinfo>
 					</annotation>
 					<simpleType>
-			<restriction base="string">
-				<enumeration value="Stein">
-				</enumeration>
-				<enumeration value="Jord/løsmasse">
-				</enumeration>
-				<enumeration value="Is/stein">
-				</enumeration>
-				<enumeration value="Snø">
-				</enumeration>
-				<enumeration value="Is">
-				</enumeration>
-				<enumeration value="Flomskred (vann+stein+jord)">
-				</enumeration>
-				<enumeration value="Sørpeskred (vann+snø+stein)">
-				</enumeration>
-				<enumeration value="Utglidning av veg">
-				</enumeration>
-			</restriction>
+						<restriction base="string">
+							<enumeration value="Stein">
+							</enumeration>
+							<enumeration value="Jord/løsmasse">
+							</enumeration>
+							<enumeration value="Is/stein">
+							</enumeration>
+							<enumeration value="Snø">
+							</enumeration>
+							<enumeration value="Is">
+							</enumeration>
+							<enumeration value="Flomskred (vann+stein+jord)">
+							</enumeration>
+							<enumeration value="Sørpeskred (vann+snø+stein)">
+							</enumeration>
+							<enumeration value="Utglidning av veg">
+							</enumeration>
+						</restriction>
 					</simpleType>
 				</element>
 				<element name="volumAvSkredmasserPåVeg">
@@ -76,20 +86,20 @@
 						</appinfo>
 					</annotation>
 					<simpleType>
-			<restriction base="string">
-				<enumeration value="<10 kbm">
-				</enumeration>
-				<enumeration value="< 100 kbm">
-				</enumeration>
-				<enumeration value="< 1000 kbm">
-				</enumeration>
-				<enumeration value="> 1000 kbm">
-				</enumeration>
-				<enumeration value="Ikke vurdert">
-				</enumeration>
-				<enumeration value="< 1 kbm">
-				</enumeration>
-			</restriction>
+						<restriction base="string">
+							<enumeration value="&lt10 kbm">
+							</enumeration>
+							<enumeration value="&lt 100 kbm">
+							</enumeration>
+							<enumeration value="&lt 1000 kbm">
+							</enumeration>
+							<enumeration value="&gt 1000 kbm">
+							</enumeration>
+							<enumeration value="Ikke vurdert">
+							</enumeration>
+							<enumeration value="&lt 1 kbm">
+							</enumeration>
+						</restriction>
 					</simpleType>
 				</element>
 				<element name="løsneområde">
@@ -102,20 +112,20 @@
 						</appinfo>
 					</annotation>
 					<simpleType>
-			<restriction base="string">
-				<enumeration value="Vegbane/-fylling">
-				</enumeration>
-				<enumeration value="Tunnelmunning">
-				</enumeration>
-				<enumeration value="Vegskjæring">
-				</enumeration>
-				<enumeration value="Ur">
-				</enumeration>
-				<enumeration value="Fjell/dalside">
-				</enumeration>
-				<enumeration value="Inne i tunnel">
-				</enumeration>
-			</restriction>
+						<restriction base="string">
+							<enumeration value="Vegbane/-fylling">
+							</enumeration>
+							<enumeration value="Tunnelmunning">
+							</enumeration>
+							<enumeration value="Vegskjæring">
+							</enumeration>
+							<enumeration value="Ur">
+							</enumeration>
+							<enumeration value="Fjell/dalside">
+							</enumeration>
+							<enumeration value="Inne i tunnel">
+							</enumeration>
+						</restriction>
 					</simpleType>
 				</element>
 				<element name="volumAvTotaleSkredmasser">
@@ -128,17 +138,17 @@
 						</appinfo>
 					</annotation>
 					<simpleType>
-			<restriction base="integer">
-				<annotation>
-					<documentation>
-						Enhet: Kubikkmeter (11)
-					</documentation>
-				</annotation>
-				<minInclusive value="0">
-				</minInclusive>
-				<maxInclusive value="2147483647">
-				</maxInclusive>
-			</restriction>
+						<restriction base="integer">
+							<annotation>
+								<documentation>
+									Enhet: Kubikkmeter (11)
+								</documentation>
+							</annotation>
+							<minInclusive value="0">
+							</minInclusive>
+							<maxInclusive value="2147483647">
+							</maxInclusive>
+						</restriction>
 					</simpleType>
 				</element>
 				<element name="høydeforskjellVegUtløsningssted">
@@ -151,18 +161,18 @@
 						</appinfo>
 					</annotation>
 					<simpleType>
-			<restriction base="string">
-				<enumeration value="> 200 m">
-				</enumeration>
-				<enumeration value="Ikke vurdert">
-				</enumeration>
-				<enumeration value="Nedenfor veg">
-				</enumeration>
-				<enumeration value="0 - 50 m">
-				</enumeration>
-				<enumeration value="50 - 200 m">
-				</enumeration>
-			</restriction>
+						<restriction base="string">
+							<enumeration value="&gt 200 m">
+							</enumeration>
+							<enumeration value="Ikke vurdert">
+							</enumeration>
+							<enumeration value="Nedenfor veg">
+							</enumeration>
+							<enumeration value="0 - 50 m">
+							</enumeration>
+							<enumeration value="50 - 200 m">
+							</enumeration>
+						</restriction>
 					</simpleType>
 				</element>
 				<element name="vesentligeSkader">
@@ -175,12 +185,12 @@
 						</appinfo>
 					</annotation>
 					<simpleType>
-			<restriction base="string">
-				<enumeration value="Ja">
-				</enumeration>
-				<enumeration value="Nei">
-				</enumeration>
-			</restriction>
+						<restriction base="string">
+							<enumeration value="Ja">
+							</enumeration>
+							<enumeration value="Nei">
+							</enumeration>
+						</restriction>
 					</simpleType>
 				</element>
 				<element name="skadePåPerson">
@@ -193,12 +203,12 @@
 						</appinfo>
 					</annotation>
 					<simpleType>
-			<restriction base="string">
-				<enumeration value="Ja">
-				</enumeration>
-				<enumeration value="Nei">
-				</enumeration>
-			</restriction>
+						<restriction base="string">
+							<enumeration value="Ja">
+							</enumeration>
+							<enumeration value="Nei">
+							</enumeration>
+						</restriction>
 					</simpleType>
 				</element>
 				<element name="skadePåKjøretøy">
@@ -211,12 +221,12 @@
 						</appinfo>
 					</annotation>
 					<simpleType>
-			<restriction base="string">
-				<enumeration value="Ja">
-				</enumeration>
-				<enumeration value="Nei">
-				</enumeration>
-			</restriction>
+						<restriction base="string">
+							<enumeration value="Ja">
+							</enumeration>
+							<enumeration value="Nei">
+							</enumeration>
+						</restriction>
 					</simpleType>
 				</element>
 				<element name="skadePåVegdekkeVegkropp">
@@ -229,12 +239,12 @@
 						</appinfo>
 					</annotation>
 					<simpleType>
-			<restriction base="string">
-				<enumeration value="Ja">
-				</enumeration>
-				<enumeration value="Nei">
-				</enumeration>
-			</restriction>
+						<restriction base="string">
+							<enumeration value="Ja">
+							</enumeration>
+							<enumeration value="Nei">
+							</enumeration>
+						</restriction>
 					</simpleType>
 				</element>
 				<element name="skadePåBru">
@@ -247,12 +257,12 @@
 						</appinfo>
 					</annotation>
 					<simpleType>
-			<restriction base="string">
-				<enumeration value="Ja">
-				</enumeration>
-				<enumeration value="Nei">
-				</enumeration>
-			</restriction>
+						<restriction base="string">
+							<enumeration value="Ja">
+							</enumeration>
+							<enumeration value="Nei">
+							</enumeration>
+						</restriction>
 					</simpleType>
 				</element>
 				<element name="skadePåRekkverk">
@@ -265,12 +275,12 @@
 						</appinfo>
 					</annotation>
 					<simpleType>
-			<restriction base="string">
-				<enumeration value="Ja">
-				</enumeration>
-				<enumeration value="Nei">
-				</enumeration>
-			</restriction>
+						<restriction base="string">
+							<enumeration value="Ja">
+							</enumeration>
+							<enumeration value="Nei">
+							</enumeration>
+						</restriction>
 					</simpleType>
 				</element>
 				<element name="temperaturPåVeg">
@@ -288,14 +298,14 @@
 								Enhet: Grader Celcius (9)
 							</documentation>
 						</annotation>
-			<restriction base="decimal">
-				<minInclusive value="-999.9">
-				</minInclusive>
-				<maxInclusive value="999.9">
-				</maxInclusive>
-				<fractionDigits value="1">
-				</fractionDigits>
-			</restriction>
+						<restriction base="decimal">
+							<minInclusive value="-999.9">
+							</minInclusive>
+							<maxInclusive value="999.9">
+							</maxInclusive>
+							<fractionDigits value="1">
+							</fractionDigits>
+						</restriction>
 					</simpleType>
 				</element>
 				<element name="stedsangivelse">
@@ -308,8 +318,8 @@
 						</appinfo>
 					</annotation>
 					<simpleType>
-			<restriction base="string">
-			</restriction>
+						<restriction base="string">
+						</restriction>
 					</simpleType>
 				</element>
 				<element name="skadePåDrenering">
@@ -322,12 +332,12 @@
 						</appinfo>
 					</annotation>
 					<simpleType>
-			<restriction base="string">
-				<enumeration value="Ja">
-				</enumeration>
-				<enumeration value="Nei">
-				</enumeration>
-			</restriction>
+						<restriction base="string">
+							<enumeration value="Ja">
+							</enumeration>
+							<enumeration value="Nei">
+							</enumeration>
+						</restriction>
 					</simpleType>
 				</element>
 				<element name="værforholdPåVegen">
@@ -340,27 +350,37 @@
 						</appinfo>
 					</annotation>
 					<simpleType>
-			<restriction base="string">
-				<enumeration value="Ingen nedbør">
-				</enumeration>
-				<enumeration value="Regn">
-				</enumeration>
-				<enumeration value="Regn, lite">
-				</enumeration>
-				<enumeration value="Regn, middels">
-				</enumeration>
-				<enumeration value="Regn, mye">
-				</enumeration>
-				<enumeration value="Snø">
-				</enumeration>
-				<enumeration value="Snø, lite">
-				</enumeration>
-				<enumeration value="Snø, middels">
-				</enumeration>
-				<enumeration value="Snø, mye">
-				</enumeration>
-			</restriction>
+						<restriction base="string">
+							<enumeration value="Ingen nedbør">
+							</enumeration>
+							<enumeration value="Regn">
+							</enumeration>
+							<enumeration value="Regn, lite">
+							</enumeration>
+							<enumeration value="Regn, middels">
+							</enumeration>
+							<enumeration value="Regn, mye">
+							</enumeration>
+							<enumeration value="Snø">
+							</enumeration>
+							<enumeration value="Snø, lite">
+							</enumeration>
+							<enumeration value="Snø, middels">
+							</enumeration>
+							<enumeration value="Snø, mye">
+							</enumeration>
+						</restriction>
 					</simpleType>
+				</element>
+				<element name="geometriLinje" type="gml:CurvePropertyType">
+					<annotation>
+						<documentation>
+							Gir linje/kurve som geometrisk representerer objektet.
+						</documentation>
+						<appinfo>
+							GeometriLinje_4963 : 4963
+						</appinfo>
+					</annotation>
 				</element>
 				<element name="vindretning">
 					<annotation>
@@ -372,42 +392,42 @@
 						</appinfo>
 					</annotation>
 					<simpleType>
-			<restriction base="string">
-				<enumeration value="SSV">
-				</enumeration>
-				<enumeration value="SV">
-				</enumeration>
-				<enumeration value="VSV">
-				</enumeration>
-				<enumeration value="V">
-				</enumeration>
-				<enumeration value="VNV">
-				</enumeration>
-				<enumeration value="NV">
-				</enumeration>
-				<enumeration value="NNV">
-				</enumeration>
-				<enumeration value="N">
-				</enumeration>
-				<enumeration value="NNØ">
-				</enumeration>
-				<enumeration value="ØNØ">
-				</enumeration>
-				<enumeration value="Ø">
-				</enumeration>
-				<enumeration value="ØSØ">
-				</enumeration>
-				<enumeration value="SØ">
-				</enumeration>
-				<enumeration value="SSØ">
-				</enumeration>
-				<enumeration value="NØ">
-				</enumeration>
-				<enumeration value="Vindstille">
-				</enumeration>
-				<enumeration value="S">
-				</enumeration>
-			</restriction>
+						<restriction base="string">
+							<enumeration value="SSV">
+							</enumeration>
+							<enumeration value="SV">
+							</enumeration>
+							<enumeration value="VSV">
+							</enumeration>
+							<enumeration value="V">
+							</enumeration>
+							<enumeration value="VNV">
+							</enumeration>
+							<enumeration value="NV">
+							</enumeration>
+							<enumeration value="NNV">
+							</enumeration>
+							<enumeration value="N">
+							</enumeration>
+							<enumeration value="NNØ">
+							</enumeration>
+							<enumeration value="ØNØ">
+							</enumeration>
+							<enumeration value="Ø">
+							</enumeration>
+							<enumeration value="ØSØ">
+							</enumeration>
+							<enumeration value="SØ">
+							</enumeration>
+							<enumeration value="SSØ">
+							</enumeration>
+							<enumeration value="NØ">
+							</enumeration>
+							<enumeration value="Vindstille">
+							</enumeration>
+							<enumeration value="S">
+							</enumeration>
+						</restriction>
 					</simpleType>
 				</element>
 				<element name="blokkertVeglengde">
@@ -420,18 +440,18 @@
 						</appinfo>
 					</annotation>
 					<simpleType>
-			<restriction base="string">
-				<enumeration value="< 10 m">
-				</enumeration>
-				<enumeration value="10 - 50 m">
-				</enumeration>
-				<enumeration value="50 - 100 m">
-				</enumeration>
-				<enumeration value="> 100 m">
-				</enumeration>
-				<enumeration value="Kun i grøft">
-				</enumeration>
-			</restriction>
+						<restriction base="string">
+							<enumeration value="&lt 10 m">
+							</enumeration>
+							<enumeration value="10 - 50 m">
+							</enumeration>
+							<enumeration value="50 - 100 m">
+							</enumeration>
+							<enumeration value="&gt 100 m">
+							</enumeration>
+							<enumeration value="Kun i grøft">
+							</enumeration>
+						</restriction>
 					</simpleType>
 				</element>
 				<element name="registreringsansvarlig">
@@ -444,8 +464,8 @@
 						</appinfo>
 					</annotation>
 					<simpleType>
-			<restriction base="string">
-			</restriction>
+						<restriction base="string">
+						</restriction>
 					</simpleType>
 				</element>
 				<element name="blokkertGangSykkelveg">
@@ -458,12 +478,12 @@
 						</appinfo>
 					</annotation>
 					<simpleType>
-			<restriction base="string">
-				<enumeration value="Ja">
-				</enumeration>
-				<enumeration value="Nei">
-				</enumeration>
-			</restriction>
+						<restriction base="string">
+							<enumeration value="Ja">
+							</enumeration>
+							<enumeration value="Nei">
+							</enumeration>
+						</restriction>
 					</simpleType>
 				</element>
 				<element name="grøftebreddePåSkredside">
@@ -481,14 +501,14 @@
 								Enhet: Meter (1)
 							</documentation>
 						</annotation>
-			<restriction base="decimal">
-				<minInclusive value="0.0">
-				</minInclusive>
-				<maxInclusive value="99.9">
-				</maxInclusive>
-				<fractionDigits value="1">
-				</fractionDigits>
-			</restriction>
+						<restriction base="decimal">
+							<minInclusive value="0.0">
+							</minInclusive>
+							<maxInclusive value="99.9">
+							</maxInclusive>
+							<fractionDigits value="1">
+							</fractionDigits>
+						</restriction>
 					</simpleType>
 				</element>
 				<element name="stengning">
@@ -501,273 +521,29 @@
 						</appinfo>
 					</annotation>
 					<simpleType>
-			<restriction base="string">
-				<enumeration value="Ingen stengning">
-				</enumeration>
-				<enumeration value="Stengning av del av vegbane">
-				</enumeration>
-				<enumeration value="Stengt for tungtrafikk">
-				</enumeration>
-				<enumeration value="Stengt for personbiler">
-				</enumeration>
-				<enumeration value="Stengt for all trafikk">
-				</enumeration>
-			</restriction>
+						<restriction base="string">
+							<enumeration value="Ingen stengning">
+							</enumeration>
+							<enumeration value="Stengning av del av vegbane">
+							</enumeration>
+							<enumeration value="Stengt for tungtrafikk">
+							</enumeration>
+							<enumeration value="Stengt for personbiler">
+							</enumeration>
+							<enumeration value="Stengt for all trafikk">
+							</enumeration>
+						</restriction>
 					</simpleType>
 				</element>
-				<element name="utgårStengtFraDato">
+				<element name="geometriPunkt" type="gml:PointPropertyType">
 					<annotation>
 						<documentation>
-							Angir dato for når vegen ble steng
+							Gir punkt som geometrisk representerer objektet.
 						</documentation>
 						<appinfo>
-							Utgår_StengtFraDato_2345 : 2345
+							GeometriPunkt_8938 : 8938
 						</appinfo>
 					</annotation>
-					<simpleType>
-			<restriction base="string">
-				<pattern value="^[0-9]{4}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$">
-				</pattern>
-			</restriction>
-					</simpleType>
-				</element>
-				<element name="utgårStengtFraKlokkeslett">
-					<annotation>
-						<documentation>
-							Angir klokkeslett for stengning av vegen.
-						</documentation>
-						<appinfo>
-							Utgår_StengtFraKlokke_2346 : 2346
-						</appinfo>
-					</annotation>
-					<simpleType>
-			<restriction base="integer">
-				<minInclusive value="-2147483648">
-				</minInclusive>
-				<maxInclusive value="2147483647">
-				</maxInclusive>
-			</restriction>
-					</simpleType>
-				</element>
-				<element name="utgårÅpentFraDato">
-					<annotation>
-						<documentation>
-							Angir dato for åpning av vegen.
-						</documentation>
-						<appinfo>
-							Utgår_ÅpentFraDato_2347 : 2347
-						</appinfo>
-					</annotation>
-					<simpleType>
-			<restriction base="string">
-				<pattern value="^[0-9]{4}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$">
-				</pattern>
-			</restriction>
-					</simpleType>
-				</element>
-				<element name="utgårÅpentFraKlokkeslett">
-					<annotation>
-						<documentation>
-							Angir klokkeslett for åpning av vegen.
-						</documentation>
-						<appinfo>
-							Utgår_ÅpentFraKlokkes_2348 : 2348
-						</appinfo>
-					</annotation>
-					<simpleType>
-			<restriction base="integer">
-				<minInclusive value="-2147483648">
-				</minInclusive>
-				<maxInclusive value="2147483647">
-				</maxInclusive>
-			</restriction>
-					</simpleType>
-				</element>
-				<element name="utgårMengdeRegn">
-					<annotation>
-						<documentation>
-							Angir mengde regn (mm/døgn) målt ved værstasjon.
-						</documentation>
-						<appinfo>
-							Utgår_MengdeRegn_2349 : 2349
-						</appinfo>
-					</annotation>
-					<simpleType>
-			<restriction base="integer">
-				<annotation>
-					<documentation>
-						Enhet: Millimeter (4)
-					</documentation>
-				</annotation>
-				<minInclusive value="-2147483648">
-				</minInclusive>
-				<maxInclusive value="2147483647">
-				</maxInclusive>
-			</restriction>
-					</simpleType>
-				</element>
-				<element name="utgårMengdeVåtSnøSludd">
-					<annotation>
-						<documentation>
-							Angir mengde våt snø/sludd (mm/døgn) målt ved værstasjon
-						</documentation>
-						<appinfo>
-							Utgår_MengdeVåtSnøSlu_2350 : 2350
-						</appinfo>
-					</annotation>
-					<simpleType>
-			<restriction base="integer">
-				<annotation>
-					<documentation>
-						Enhet: Millimeter (4)
-					</documentation>
-				</annotation>
-				<minInclusive value="-2147483648">
-				</minInclusive>
-				<maxInclusive value="2147483647">
-				</maxInclusive>
-			</restriction>
-					</simpleType>
-				</element>
-				<element name="utgårVindretningVedVærstasjon">
-					<annotation>
-						<documentation>
-							Angir vindretning ved værstasjon
-						</documentation>
-						<appinfo>
-							Utgår_VindretningVedV_4526 : 4526
-						</appinfo>
-					</annotation>
-					<simpleType>
-			<restriction base="string">
-				<enumeration value="SV">
-				</enumeration>
-				<enumeration value="VSV">
-				</enumeration>
-				<enumeration value="V">
-				</enumeration>
-				<enumeration value="VNV">
-				</enumeration>
-				<enumeration value="NV">
-				</enumeration>
-				<enumeration value="NNV">
-				</enumeration>
-				<enumeration value="N">
-				</enumeration>
-				<enumeration value="NNØ">
-				</enumeration>
-				<enumeration value="NØ">
-				</enumeration>
-				<enumeration value="ØNØ">
-				</enumeration>
-				<enumeration value="Ø">
-				</enumeration>
-				<enumeration value="ØSØ">
-				</enumeration>
-				<enumeration value="SØ">
-				</enumeration>
-				<enumeration value="SSØ">
-				</enumeration>
-				<enumeration value="S">
-				</enumeration>
-				<enumeration value="SSV">
-				</enumeration>
-			</restriction>
-					</simpleType>
-				</element>
-				<element name="utgårMengdeSnø">
-					<annotation>
-						<documentation>
-							Angir mengde snø (mm/døgn) målt ved værstasjon
-						</documentation>
-						<appinfo>
-							Utgår_MengdeSnø_2351 : 2351
-						</appinfo>
-					</annotation>
-					<simpleType>
-			<restriction base="integer">
-				<annotation>
-					<documentation>
-						Enhet: Millimeter (4)
-					</documentation>
-				</annotation>
-				<minInclusive value="-2147483648">
-				</minInclusive>
-				<maxInclusive value="2147483647">
-				</maxInclusive>
-			</restriction>
-					</simpleType>
-				</element>
-				<element name="utgårVindstyrkeVVærstasjon">
-					<annotation>
-						<documentation>
-							Angir vindstyrke målt ved værstasjon
-						</documentation>
-						<appinfo>
-							Utgår_VindstyrkeVVærs_2352 : 2352
-						</appinfo>
-					</annotation>
-					<simpleType>
-			<restriction base="integer">
-				<annotation>
-					<documentation>
-						Enhet: Meter/sekund (8)
-					</documentation>
-				</annotation>
-				<minInclusive value="-2147483648">
-				</minInclusive>
-				<maxInclusive value="2147483647">
-				</maxInclusive>
-			</restriction>
-					</simpleType>
-				</element>
-				<element name="utgårTemperaturVVærstasjon">
-					<annotation>
-						<documentation>
-							Angir temperatur målt ved værstasjon
-						</documentation>
-						<appinfo>
-							Utgår_TemperaturVVærs_2353 : 2353
-						</appinfo>
-					</annotation>
-					<simpleType>
-						<annotation>
-							<documentation>
-								Enhet: Grader Celcius (9)
-							</documentation>
-						</annotation>
-			<restriction base="decimal">
-				<minInclusive value="-999.9">
-				</minInclusive>
-				<maxInclusive value="999.9">
-				</maxInclusive>
-				<fractionDigits value="1">
-				</fractionDigits>
-			</restriction>
-					</simpleType>
-				</element>
-				<element name="utgårNedbørSisteDøgn">
-					<annotation>
-						<documentation>
-							Angir total nedbørsmengde siste tre døgn målt ved værstasjon.
-						</documentation>
-						<appinfo>
-							Utgår_NedbørSiste3Døg_2354 : 2354
-						</appinfo>
-					</annotation>
-					<simpleType>
-			<restriction base="integer">
-				<annotation>
-					<documentation>
-						Enhet: Millimeter (4)
-					</documentation>
-				</annotation>
-				<minInclusive value="-2147483648">
-				</minInclusive>
-				<maxInclusive value="2147483647">
-				</maxInclusive>
-			</restriction>
-					</simpleType>
 				</element>
 				<element name="bilder">
 					<annotation>
@@ -779,12 +555,12 @@
 						</appinfo>
 					</annotation>
 					<simpleType>
-			<restriction base="string">
-				<enumeration value="Ja">
-				</enumeration>
-				<enumeration value="Nei">
-				</enumeration>
-			</restriction>
+						<restriction base="string">
+							<enumeration value="Ja">
+							</enumeration>
+							<enumeration value="Nei">
+							</enumeration>
+						</restriction>
 					</simpleType>
 				</element>
 			</sequence>

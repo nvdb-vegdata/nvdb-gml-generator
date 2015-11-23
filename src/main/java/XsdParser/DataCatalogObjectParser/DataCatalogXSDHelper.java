@@ -92,4 +92,13 @@ public class DataCatalogXSDHelper {
         return Optional.ofNullable(res);
 
     }
+    public static String excapeIllegalChars(String value){
+        value = value.replaceAll("&","&amp");
+        value = value.replaceAll("<","&lt");
+        value = value.replaceAll(">","&gt");
+
+        return value;
+
+    }
+
 }
