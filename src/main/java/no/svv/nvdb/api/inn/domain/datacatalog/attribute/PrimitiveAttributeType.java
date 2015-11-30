@@ -1,6 +1,5 @@
 package no.svv.nvdb.api.inn.domain.datacatalog.attribute;
 
-
 import no.svv.nvdb.api.inn.domain.datacatalog.constraint.EnumAttribute;
 
 import java.time.OffsetDateTime;

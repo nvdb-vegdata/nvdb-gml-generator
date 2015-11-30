@@ -21,13 +21,31 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class ObjXsdParser implements ObjectParser {
+public class DataCatalogXsdParser implements ObjectParser {
     private Schema schema;
     private Namespace globalNamespace;
 
     @Override
+    public boolean translationExistFor(Object object){
+        if(object instanceof StringAttributeType
+            || object instanceof WStringAttributeType
+            || object instanceof EnumStringAttribute
+            || object instanceof IntegerAttributeType
+            || object instanceof RealAttributeType
+            || object instanceof TimeAttributeType
+            || object instanceof DateAttributeType
+            || object instanceof ShortDateAttributeType
+            || object instanceof BoolAttributeType
+            || object instanceof SpatialAttributeType
+            || object instanceof CharAttributeType){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public Schema createSchemaTag(String name) {
-        globalNamespace = new Namespace(XSDTagAttribute.XMLNS, "http://www.w3.org/2001/XMLSchema","xsd", "xs");
+        globalNamespace = new Namespace(XSDTagAttribute.XMLNS, "http://www.w3.org/2001/XMLSchema","xsd", "");
         Schema schema = new Schema(name, globalNamespace);
         schema.addNamespace(new Namespace(XSDTagAttribute.XMLNS, "http://www.opengis.net/gml/3.2", "gml", "gml"));
         schema.addXSDComponentAttribute(new XSDComponentAttribute(XSDTagAttribute.TARGETNAMESPACE, "http://myNameSpace.com"));
@@ -40,33 +58,45 @@ public class ObjXsdParser implements ObjectParser {
         XSDComponent component = null;
         if(object instanceof StringAttributeType){
             XSDDataType dataType = DataCatalogXSDHelper.getXSDDatatype((AttributeType)object);
-            component = createStringAttribute((StringAttributeType) object, dataType);
+            component = createStringAttribute((StringAttributeType)object, dataType);
+        } else if(object instanceof WStringAttributeType){
+            XSDDataType dataType = DataCatalogXSDHelper.getXSDDatatype((AttributeType)object);
+            component = createStringAttribute((WStringAttributeType)object, dataType);
         } else if( object instanceof EnumStringAttribute){
-            component = createEnumStringAttribute((EnumStringAttribute)object);
+            component = createEnumStringAttribute((EnumStringAttribute) object);
         }  else if(object instanceof IntegerAttributeType){
             XSDDataType dataType = DataCatalogXSDHelper.getXSDDatatype((AttributeType)object);
             component = createIntegerAttribute(((IntegerAttributeType) object), dataType);
         } else if(object instanceof RealAttributeType){
             XSDDataType dataType = DataCatalogXSDHelper.getXSDDatatype((AttributeType)object);
-            component = createRealAttribute((RealAttributeType)object, dataType);
+            component = createRealAttribute((RealAttributeType) object, dataType);
         } else if(object instanceof TimeAttributeType){
             XSDDataType dataType = DataCatalogXSDHelper.getXSDDatatype((AttributeType)object);
-            component = createTimeAttribute((TimeAttributeType)object, dataType);
+            component = createTimeAttribute((TimeAttributeType) object, dataType);
         } else if(object instanceof DateAttributeType){
             XSDDataType dataType = DataCatalogXSDHelper.getXSDDatatype((AttributeType)object);
-            component = createDateAttribute((DateAttributeType)object, dataType);
+            component = createDateAttribute((DateAttributeType) object, dataType);
         } else if(object instanceof ShortDateAttributeType){
             XSDDataType dataType = DataCatalogXSDHelper.getXSDDatatype((AttributeType)object);
-            component = createShortDateAttribute((ShortDateAttributeType)object,dataType);
+            component = createShortDateAttribute((ShortDateAttributeType) object, dataType);
         } else if(object instanceof BoolAttributeType) {
             XSDDataType dataType = DataCatalogXSDHelper.getXSDDatatype((AttributeType)object);
-            component = createBooleanAttribute((BoolAttributeType)object, dataType);
+            component = createBooleanAttribute((BoolAttributeType) object, dataType);
         } else if(object instanceof SpatialAttributeType){
-            component = createSpatialAttribute((SpatialAttributeType)object);
+            component = createSpatialAttribute((SpatialAttributeType) object);
+        } else if(object instanceof CharAttributeType){
+            XSDDataType dataType = DataCatalogXSDHelper.getXSDDatatype((AttributeType)object);
+            component = createCharAttribute((CharAttributeType) object, dataType);
         }
-
-
         return Optional.ofNullable(component);
+    }
+
+    private XSDComponent createCharAttribute(CharAttributeType at, XSDDataType dataType){
+        Restriction restriction = new Restriction(dataType, globalNamespace);
+        SimpleType simpleType = new SimpleType(restriction, globalNamespace);
+        XSDComponent patternFacet = new PatternFacet(".", globalNamespace);
+        simpleType.addChildComponent(patternFacet, simpleType);
+        return createElement(at, simpleType);
     }
 
     private XSDComponent createSpatialAttribute(SpatialAttributeType at){
@@ -77,10 +107,14 @@ public class ObjXsdParser implements ObjectParser {
         XSDComponentAttribute nameAttribute = new XSDComponentAttribute(XSDTagAttribute.NAME,elementName);
         Optional<String> typeValue = DataCatalogXSDHelper.getGmlTypeFromSpatial(at.getSpatialType());
         componentAttributes.add(nameAttribute);
-        if(typeValue.isPresent()){
+        if(typeValue.isPresent() && schema.getNamespaceWithName("gml").isPresent()){
             String typeWithPrefix = schema.getNamespaceWithName("gml").get().getTypeNameWithPrefix(typeValue.get());
             XSDComponentAttribute typeAttribute = new XSDComponentAttribute(XSDTagAttribute.TYPE, typeWithPrefix);
             componentAttributes.add(typeAttribute);
+        }else {
+            Element element =  createElement(at, componentAttributes);
+            element.setDeprecated(true);
+            return element;
         }
         return createElement(at, componentAttributes);
     }
@@ -146,6 +180,13 @@ public class ObjXsdParser implements ObjectParser {
         SimpleType simpleType = new SimpleType(restriction, globalNamespace);
         return createElement(at, simpleType);
     }
+
+    private XSDComponent createStringAttribute(WStringAttributeType at, XSDDataType dataType){
+        Restriction restriction = new Restriction(dataType, globalNamespace);
+        SimpleType simpleType = new SimpleType(restriction, globalNamespace);
+        return createElement(at, simpleType);
+    }
+
     private XSDComponent createIntegerAttribute(IntegerAttributeType at, XSDDataType dataType){
         Restriction restriction = new Restriction(dataType, globalNamespace);
         XSDComponent maxInclusive = new MaxInclusiveFacet( at.getAbsoluteMaxValue().toString(), globalNamespace);

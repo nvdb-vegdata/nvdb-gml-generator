@@ -1,7 +1,7 @@
 package no.svv.nvdb.api.inn.domain.datacatalog.attribute;
 
-
 import no.svv.nvdb.api.inn.domain.datacatalog.Unit;
+
 
 public class RealAttributeType extends PrimitiveAttributeType<Double> {
     private Double recommendedMinValue;

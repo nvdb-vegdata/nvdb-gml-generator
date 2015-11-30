@@ -49,7 +49,7 @@ public class DataCatalogXSDHelper {
 
     public static XSDDataType getXSDDatatype(AttributeType attributeType) {
         XSDDataType dataType = null;
-        if(attributeType instanceof StringAttributeType){
+        if(attributeType instanceof StringAttributeType || attributeType instanceof CharAttributeType){
             dataType = XSDDataType.STRING;
         }  else if(attributeType instanceof IntegerAttributeType){
             dataType = XSDDataType.INTEGER;
@@ -93,6 +93,7 @@ public class DataCatalogXSDHelper {
 
     }
     public static String excapeIllegalChars(String value){
+        if(value == null || value.isEmpty())return value;
         value = value.replaceAll("&","&amp;");
         value = value.replaceAll("<","&lt;");
         value = value.replaceAll(">","&gt;");

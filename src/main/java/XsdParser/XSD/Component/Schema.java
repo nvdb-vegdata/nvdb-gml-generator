@@ -40,7 +40,7 @@ public class Schema extends XSDComponent {
 
 
     public Optional<Namespace> getNamespaceWithName(String name){
-        return Optional.of(namespaces.get(name));
+        return Optional.ofNullable(namespaces.get(name));
     }
 
     @Override

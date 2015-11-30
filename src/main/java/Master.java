@@ -1,7 +1,7 @@
 import XsdParser.Parser.SchemaDefinition;
-import XsdParser.DataCatalogObjectParser.ObjXsdParser;
+import XsdParser.DataCatalogObjectParser.DataCatalogXsdParser;
 import XsdParser.Parser.ObjectParser;
-import XsdParser.Parser.XsdBuilder;
+import XsdParser.Parser.IteratorListenerImpl;
 import no.svv.nvdb.api.inn.domain.datacatalog.DataCatalog;
 import no.svv.nvdb.api.inn.domain.datacatalog.FeatureType;
 import no.svv.nvdb.api.inn.domain.datacatalog.association.AssociationType;
@@ -9,7 +9,6 @@ import no.svv.nvdb.api.inn.domain.datacatalog.attribute.*;
 import restaccess.NvdbWriteApiGateway;
 
 import java.io.*;
-import java.util.Date;
 
 
 public class Master {
@@ -45,8 +44,8 @@ public class Master {
 
     private static void generateXSDFromFeatureType(FeatureType featureType){
         if(featureType == null)return;
-        ObjectParser parser = new ObjXsdParser();
-        XsdBuilder builder = new XsdBuilder(parser);
+        ObjectParser parser = new DataCatalogXsdParser();
+        IteratorListenerImpl builder = new IteratorListenerImpl(parser);
         SchemaDefinition schemaDefinition = builder.generateSchemaDefinition(featureType.attributeTypes().toArray(), featureType.getName());
         System.out.println(schemaDefinition.unLoad());
         printToFile(schemaDefinition.unLoad());
@@ -73,32 +72,11 @@ public class Master {
     private static void handleAttributeTypes(FeatureType featureType){
         featureType.attributeTypes()
                 .forEach(attributeType -> {
-                    /*
-                    System.out.println("ID: " + attributeType.getId());
-                    System.out.println("Name: " + attributeType.getName());
-                    System.out.println("Desc: " + attributeType.getDescription());
-                    System.out.println("Type: " + attributeType.getType());
-                    */
-                    if(attributeType instanceof IntegerAttributeType || attributeType instanceof RealAttributeType
-                            || attributeType instanceof StringAttributeType || attributeType instanceof BoolAttributeType
-                            || attributeType instanceof DateAttributeType || attributeType instanceof ShortDateAttributeType
-                            || attributeType instanceof TimeAttributeType || attributeType == null
-                            || attributeType instanceof ListAttributeType
-                            || attributeType instanceof AssociationType || attributeType instanceof LocationalAttributeType){
-
-                    }else if(attributeType instanceof SpatialAttributeType){
-                        SpatialAttributeType sp = (SpatialAttributeType)attributeType;
-                        //System.out.println(sp.getSpatialType());
-                        if(sp.getSpatialType() == SpatialType.POLYGON) {
-                            System.out.println(" - - - " + featureType.getName());
-                            System.out.println("Name: " + attributeType.getName());
-                            System.out.println("Name: " + attributeType.getId());
-                            System.out.println("Desc: " + attributeType.getDescription());
-                            System.out.println("Type: " + attributeType.getType());
-                        }
-
-
-                    }
+                        System.out.println("****** Featuretype: " + featureType.getName());
+                        System.out.println("ID: " + attributeType.getId());
+                        System.out.println("Name: " + attributeType.getName());
+                        System.out.println("Desc: " + attributeType.getDescription());
+                        System.out.println("Type: " + attributeType.getType());
 
 
         });

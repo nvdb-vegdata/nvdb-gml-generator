@@ -3,8 +3,8 @@ package no.svv.nvdb.api.inn.domain.datacatalog;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import no.svv.nvdb.api.inn.domain.datacatalog.attribute.*;
 import no.svv.nvdb.api.inn.domain.datacatalog.association.AssociationType;
+import no.svv.nvdb.api.inn.domain.datacatalog.attribute.*;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -15,8 +15,9 @@ import java.util.stream.Stream;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.toList;
-import static no.svv.nvdb.api.inn.domain.datacatalog.attribute.AttributeType.Type.LOCATIONAL;
 import static no.svv.nvdb.api.inn.domain.datacatalog.attribute.AttributeType.Type.LIST;
+import static no.svv.nvdb.api.inn.domain.datacatalog.attribute.AttributeType.Type.LOCATIONAL;
+
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 public class FeatureType {

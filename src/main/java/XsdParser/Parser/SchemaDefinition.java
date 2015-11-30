@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 public class SchemaDefinition {
     private Schema schema;
     private XSDComponent currentXSDComponent;
+
     public void addSchemaTag(Schema schema){
         this.schema = schema;
         ComplexType complexType = new ComplexType(schema.getNamespace().get());
@@ -19,23 +20,23 @@ public class SchemaDefinition {
         complexType.addChildComponent(sequence, complexType);
         Element mainElement = new Element(schema.getMainElementName(),complexType,schema.getNamespace().get());
         schema.addChildComponent(mainElement,schema);
-        currentXSDComponent = sequence;
+        setCurrentXSDComponent(sequence);
     }
 
     public void addComponent(XSDComponent xsdComponent){
         currentXSDComponent.addChildComponent(xsdComponent, currentXSDComponent);
-        currentXSDComponent = xsdComponent;
+        setCurrentXSDComponent(xsdComponent);
     }
 
     public void exitToParentComponent(){
         if(currentXSDComponent.getParentComponent().isPresent()){
-            currentXSDComponent = currentXSDComponent.getParentComponent().get();
+            setCurrentXSDComponent(currentXSDComponent.getParentComponent().get());
         }
     }
 
-    /**
-     * Method to remove element components flagged with "deprecated" from the schema definition
-     */
+    private void setCurrentXSDComponent(XSDComponent xsdComponent){
+        currentXSDComponent = xsdComponent;
+    }
 
     //Test method
     public String unLoad(){

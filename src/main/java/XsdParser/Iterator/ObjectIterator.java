@@ -20,29 +20,6 @@ public class ObjectIterator implements IObjectIterator {
         this.iterator = new RootIterator(name, object);
         this.listener = listener;
     }
-    /*
-    public boolean iterate() {
-
-        if (property != null) {
-            if (!isSingleValued(property) && !visitedProperties.contains(property)) {
-                visitedProperties.add(property);
-                IObjectIterator childIterator = createIteratorFor(property);
-                enterChildProperty(childIterator);
-                return iterate();
-            }
-        }
-
-        if(iterateCurrentIterator()){
-            return iterate();
-        }
-
-        if (hasParentProperty()) {
-            exitToParentProperty();
-            return iterate();
-        }
-
-        return false;
-    }*/
     public boolean iterate() {
         boolean continueIterate;
         do{

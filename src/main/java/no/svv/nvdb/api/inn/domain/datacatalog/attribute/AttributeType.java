@@ -1,14 +1,11 @@
 package no.svv.nvdb.api.inn.domain.datacatalog.attribute;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import no.svv.nvdb.api.inn.domain.datacatalog.association.AssociationType;
 import no.svv.nvdb.api.inn.domain.datacatalog.constraint.EnumAttribute;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Stream;
 
 
@@ -31,6 +28,7 @@ public abstract class AttributeType<T> {
     protected boolean enumerated;
 
     protected Map<Integer, EnumAttribute<T>> enumValues = new HashMap<>();
+    protected List<ConditionalRequirement> conditionalRequirements = new ArrayList<>();
 
     private ListAttributeType listAttributeType;
 
@@ -122,6 +120,22 @@ public abstract class AttributeType<T> {
 
     public Stream<EnumAttribute<T>> enumValues() {
         return enumValues.values().stream();
+    }
+
+    public boolean hasConditionalRequirements() {
+        return !conditionalRequirements.isEmpty();
+    }
+
+    public List<ConditionalRequirement> getConditionalRequirements() {
+        return conditionalRequirements;
+    }
+
+    public Stream<ConditionalRequirement> conditionalRequirements() {
+        return conditionalRequirements.stream();
+    }
+
+    public void addConditionalRequirement(ConditionalRequirement conditionalRequirement) {
+        this.conditionalRequirements.add(conditionalRequirement);
     }
 
     @JsonIgnore

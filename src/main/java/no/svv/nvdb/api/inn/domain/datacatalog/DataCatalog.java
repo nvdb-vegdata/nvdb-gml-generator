@@ -6,9 +6,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
-import no.svv.nvdb.api.inn.domain.datacatalog.attribute.AttributeTypeMap;
 import no.svv.nvdb.api.inn.domain.datacatalog.association.AssociationType;
 import no.svv.nvdb.api.inn.domain.datacatalog.attribute.AttributeType;
+import no.svv.nvdb.api.inn.domain.datacatalog.attribute.AttributeTypeMap;
 import no.svv.nvdb.api.inn.domain.datacatalog.attribute.ListAttributeType;
 import no.svv.nvdb.api.inn.domain.datacatalog.attribute.StructAttributeType;
 

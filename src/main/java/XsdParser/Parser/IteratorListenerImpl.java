@@ -3,11 +3,13 @@ package XsdParser.Parser;
 import XsdParser.Iterator.ObjectIterator;
 import XsdParser.XSD.Component.XSDComponent;
 
-public class XsdBuilder implements IteratorListener {
+import java.util.Optional;
+
+public class IteratorListenerImpl implements IteratorListener {
     private ObjectParser objectParser;
     private SchemaDefinition schemaDefinition;
 
-    public XsdBuilder(ObjectParser objectParser) {
+    public IteratorListenerImpl(ObjectParser objectParser) {
         this.objectParser = objectParser;
     }
 
@@ -21,15 +23,15 @@ public class XsdBuilder implements IteratorListener {
 
     @Override
     public void entered(Object object) {
-        if(objectParser.translate(object).isPresent()){
-            XSDComponent xsdComponent = objectParser.translate(object).get();
-            schemaDefinition.addComponent(xsdComponent);
+        if(objectParser.translationExistFor(object)){
+            Optional<XSDComponent> xsdComponent = objectParser.translate(object);
+            schemaDefinition.addComponent(xsdComponent.get());
         }
     }
 
     @Override
     public void exited(Object object) {
-        if(objectParser.translate(object).isPresent()){
+        if(objectParser.translationExistFor(object)){
             schemaDefinition.exitToParentComponent();
         }
     }

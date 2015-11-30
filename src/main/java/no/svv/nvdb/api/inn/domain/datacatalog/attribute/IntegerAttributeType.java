@@ -1,7 +1,7 @@
 package no.svv.nvdb.api.inn.domain.datacatalog.attribute;
 
-
 import no.svv.nvdb.api.inn.domain.datacatalog.Unit;
+
 
 public class IntegerAttributeType extends PrimitiveAttributeType<Long> {
     private Integer fieldLength;

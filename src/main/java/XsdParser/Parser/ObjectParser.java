@@ -9,8 +9,8 @@ import java.util.Optional;
  * Created by magopl on 28.09.2015.
  */
 public interface ObjectParser {
+     Schema createSchemaTag(String mainElementName);
+     boolean translationExistFor(Object object);
+     Optional<XSDComponent> translate(Object object);
 
-    public Schema createSchemaTag(String mainElementName);
-
-    public Optional<XSDComponent> translate(Object object);
 }
